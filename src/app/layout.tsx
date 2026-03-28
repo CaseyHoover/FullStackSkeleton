@@ -54,7 +54,7 @@ export default async function RootLayout({
           <TooltipProvider>
             <SidebarProvider
               defaultOpen={defaultOpen}
-              className="[--sidebar-width:calc(var(--spacing)*72)]"
+              className="[--sidebar-width:--spacing(72)]"
             >
               <AppSidebar variant="inset" />
               <SidebarInset>
