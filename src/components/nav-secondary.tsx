@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
 import { IconBrightness, type Icon } from "@tabler/icons-react";
+import Link from "next/link";
 import { useTheme } from "next-themes";
+import * as React from "react";
 
 import {
   SidebarGroup,
@@ -45,6 +45,7 @@ export function NavSecondary({
             </SidebarMenuItem>
           ))}
           <SidebarMenuItem className="group-data-[collapsible=icon]:hidden">
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control -- Switch is rendered as a child */}
             <SidebarMenuButton render={<label />}>
               <IconBrightness />
               <span>Dark Mode</span>
@@ -53,7 +54,7 @@ export function NavSecondary({
                   className="ml-auto"
                   checked={resolvedTheme !== "light"}
                   onCheckedChange={() =>
-                    setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                    { setTheme(resolvedTheme === "dark" ? "light" : "dark"); }
                   }
                 />
               ) : (

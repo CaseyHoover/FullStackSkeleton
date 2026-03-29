@@ -3,7 +3,6 @@
 import * as React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
-import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Card,
   CardAction,
@@ -26,12 +25,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { useIsMobile } from "@/hooks/use-mobile";
 
-export type ChartDataPoint = {
+export interface ChartDataPoint {
   date: string;
   desktop: number;
   mobile: number;
-};
+}
 
 const chartConfig = {
   visitors: {
@@ -85,7 +85,10 @@ export function ChartAreaInteractive({
       <CardHeader>
         <CardTitle>Total Visitors</CardTitle>
         <CardDescription>
-          <span className="hidden @[540px]/card:block">
+          <span className="
+            hidden
+            @[540px]/card:block
+          ">
             Total for the last 3 months
           </span>
           <span className="@[540px]/card:hidden">Last 3 months</span>
@@ -94,9 +97,13 @@ export function ChartAreaInteractive({
           <ToggleGroup
             multiple={false}
             value={timeRange ? [timeRange] : []}
-            onValueChange={(value) => setTimeRange(value[0] ?? "90d")}
+            onValueChange={(value) => { setTimeRange(value[0] ?? "90d"); }}
             variant="outline"
-            className="hidden *:data-[slot=toggle-group-item]:px-4! @[767px]/card:flex"
+            className="
+              hidden
+              *:data-[slot=toggle-group-item]:px-4!
+              @[767px]/card:flex
+            "
           >
             <ToggleGroupItem value="90d">Last 3 months</ToggleGroupItem>
             <ToggleGroupItem value="30d">Last 30 days</ToggleGroupItem>
@@ -104,10 +111,15 @@ export function ChartAreaInteractive({
           </ToggleGroup>
           <Select
             value={timeRange}
-            onValueChange={(value) => setTimeRange(value ?? "90d")}
+            onValueChange={(value) => { setTimeRange(value ?? "90d"); }}
           >
             <SelectTrigger
-              className="flex w-40 **:data-[slot=select-value]:block **:data-[slot=select-value]:truncate @[767px]/card:hidden"
+              className="
+                flex w-40
+                **:data-[slot=select-value]:block
+                **:data-[slot=select-value]:truncate
+                @[767px]/card:hidden
+              "
               size="sm"
               aria-label="Select a value"
             >
@@ -127,7 +139,10 @@ export function ChartAreaInteractive({
           </Select>
         </CardAction>
       </CardHeader>
-      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
+      <CardContent className="
+        px-2 pt-4
+        sm:px-6 sm:pt-6
+      ">
         <ChartContainer
           config={chartConfig}
           className="aspect-auto h-62.5 w-full"
@@ -166,7 +181,7 @@ export function ChartAreaInteractive({
               axisLine={false}
               tickMargin={8}
               minTickGap={32}
-              tickFormatter={(value) => {
+              tickFormatter={(value: string) => {
                 const date = new Date(value);
                 return date.toLocaleDateString("en-US", {
                   month: "short",
@@ -180,7 +195,7 @@ export function ChartAreaInteractive({
               content={
                 <ChartTooltipContent
                   labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString("en-US", {
+                    return new Date(String(value)).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
                     });

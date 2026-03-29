@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   IconDots,
   IconFolder,
@@ -8,6 +7,7 @@ import {
   IconTrash,
   type Icon,
 } from "@tabler/icons-react";
+import Link from "next/link";
 
 import {
   DropdownMenu,
@@ -52,7 +52,10 @@ export function NavDocuments({
                 render={
                   <SidebarMenuAction
                     showOnHover
-                    className="data-[state=open]:bg-accent rounded-sm"
+                    className="
+                      rounded-sm
+                      data-[state=open]:bg-accent
+                    "
                   />
                 }
               >
