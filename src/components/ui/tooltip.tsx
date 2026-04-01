@@ -76,7 +76,7 @@ function TooltipContent({
         >
           {children}
           <TooltipPrimitive.Arrow className="
-            z-50 size-2.5 translate-y-[calc(-50%-2px)] rotate-45 rounded-[2px]
+            z-50 size-2.5 translate-y-[calc(-50%-2px)] rotate-45 rounded-xs
             bg-foreground fill-foreground
             data-[side=bottom]:top-1
             data-[side=inline-end]:top-1/2! data-[side=inline-end]:-left-1

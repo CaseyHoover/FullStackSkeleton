@@ -12,7 +12,7 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
       className={cn(
         `
           peer relative flex size-4 shrink-0 items-center justify-center
-          rounded-[4px] border border-input transition-colors outline-none
+          rounded-sm border border-input transition-colors outline-none
           group-has-disabled/field:opacity-50
           after:absolute after:-inset-x-3 after:-inset-y-2
           focus-visible:border-ring focus-visible:ring-3

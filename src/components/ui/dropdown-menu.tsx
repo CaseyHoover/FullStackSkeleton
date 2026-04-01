@@ -182,7 +182,7 @@ function DropdownMenuSubContent({
       data-slot="dropdown-menu-sub-content"
       className={cn(
         `
-          w-auto min-w-[96px] rounded-lg bg-popover p-1 text-popover-foreground
+          w-auto min-w-24 rounded-lg bg-popover p-1 text-popover-foreground
           shadow-lg ring-1 ring-foreground/10 duration-100
           data-[side=bottom]:slide-in-from-top-2
           data-[side=left]:slide-in-from-right-2
