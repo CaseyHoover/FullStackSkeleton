@@ -70,9 +70,16 @@ function SidebarProvider({
   const isMobile = useIsMobile();
   const [openMobile, setOpenMobile] = React.useState(false);
 
-  // This is the internal state of the sidebar.
-  // We use openProp and setOpenProp for control from outside the component.
   const [_open, _setOpen] = React.useState(defaultOpen);
+
+  // Sync from cookie on mount to persist sidebar state across navigations.
+  React.useEffect(() => {
+    const match = new RegExp(`(?:^|; )${SIDEBAR_COOKIE_NAME}=([^;]*)`)
+      .exec(document.cookie);
+    if (match) {
+      _setOpen(match[1] === "true");
+    }
+  }, []);
   const open = openProp ?? _open;
   const setOpen = React.useCallback(
     (value: boolean | ((value: boolean) => boolean)) => {
@@ -371,6 +378,7 @@ function SidebarInset({ className, ...props }: React.ComponentProps<"main">) {
       className={cn(
         `
           relative flex w-full flex-1 flex-col bg-background
+          contain-[layout_style]
           md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0
           md:peer-data-[variant=inset]:rounded-xl
           md:peer-data-[variant=inset]:shadow-sm
