@@ -39,11 +39,11 @@ const chartConfig = {
   },
   desktop: {
     label: "Desktop",
-    color: "var(--primary)",
+    color: "var(--chart-1)",
   },
   mobile: {
     label: "Mobile",
-    color: "var(--primary)",
+    color: "var(--chart-2)",
   },
 } satisfies ChartConfig;
 
@@ -53,32 +53,22 @@ export function ChartAreaInteractive({
   data: ChartDataPoint[];
 }) {
   const isMobile = useIsMobile();
-  const [mounted, setMounted] = React.useState(false);
   const [timeRange, setTimeRange] = React.useState("90d");
 
   React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  React.useEffect(() => {
-    if (mounted && isMobile) {
+    if (isMobile) {
       setTimeRange("7d");
     }
-  }, [isMobile, mounted]);
+  }, [isMobile]);
 
-  const filteredData = chartData.filter((item) => {
-    const date = new Date(item.date);
-    const referenceDate = new Date("2024-06-30");
-    let daysToSubtract = 90;
-    if (timeRange === "30d") {
-      daysToSubtract = 30;
-    } else if (timeRange === "7d") {
-      daysToSubtract = 7;
-    }
+  const filteredData = React.useMemo(() => {
+    const daysMap: Record<string, number> = { "90d": 90, "30d": 30, "7d": 7 };
+    const daysToSubtract = daysMap[timeRange] ?? 90;
+    const referenceDate = new Date(chartData[chartData.length - 1].date);
     const startDate = new Date(referenceDate);
     startDate.setDate(startDate.getDate() - daysToSubtract);
-    return date >= startDate;
-  });
+    return chartData.filter((item) => new Date(item.date) >= startDate);
+  }, [chartData, timeRange]);
 
   return (
     <Card className="@container/card">

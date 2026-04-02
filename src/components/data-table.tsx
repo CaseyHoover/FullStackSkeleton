@@ -134,6 +134,43 @@ function DragHandle({ id }: { id: number }) {
   );
 }
 
+function EditableCell({
+  row,
+  field,
+}: {
+  row: z.infer<typeof schema>;
+  field: "target" | "limit";
+}) {
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
+          loading: `Saving ${row.header}`,
+          success: "Done",
+          error: "Error",
+        });
+      }}
+    >
+      <Label htmlFor={`${String(row.id)}-${field}`} className="sr-only">
+        {field === "target" ? "Target" : "Limit"}
+      </Label>
+      <Input
+        className="
+          h-8 w-16 border-transparent bg-transparent text-right shadow-none
+          hover:bg-input/30
+          focus-visible:border focus-visible:bg-background
+          dark:bg-transparent
+          dark:hover:bg-input/30
+          dark:focus-visible:bg-input/30
+        "
+        defaultValue={row[field]}
+        id={`${String(row.id)}-${field}`}
+      />
+    </form>
+  );
+}
+
 const columns: ColumnDef<z.infer<typeof schema>>[] = [
   {
     id: "drag",
@@ -204,64 +241,14 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     accessorKey: "target",
     header: () => <div className="w-full text-right">Target</div>,
     cell: ({ row }) => (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-            loading: `Saving ${row.original.header}`,
-            success: "Done",
-            error: "Error",
-          });
-        }}
-      >
-        <Label htmlFor={`${String(row.original.id)}-target`} className="sr-only">
-          Target
-        </Label>
-        <Input
-          className="
-            h-8 w-16 border-transparent bg-transparent text-right shadow-none
-            hover:bg-input/30
-            focus-visible:border focus-visible:bg-background
-            dark:bg-transparent
-            dark:hover:bg-input/30
-            dark:focus-visible:bg-input/30
-          "
-          defaultValue={row.original.target}
-          id={`${String(row.original.id)}-target`}
-        />
-      </form>
+      <EditableCell row={row.original} field="target" />
     ),
   },
   {
     accessorKey: "limit",
     header: () => <div className="w-full text-right">Limit</div>,
     cell: ({ row }) => (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-            loading: `Saving ${row.original.header}`,
-            success: "Done",
-            error: "Error",
-          });
-        }}
-      >
-        <Label htmlFor={`${String(row.original.id)}-limit`} className="sr-only">
-          Limit
-        </Label>
-        <Input
-          className="
-            h-8 w-16 border-transparent bg-transparent text-right shadow-none
-            hover:bg-input/30
-            focus-visible:border focus-visible:bg-background
-            dark:bg-transparent
-            dark:hover:bg-input/30
-            dark:focus-visible:bg-input/30
-          "
-          defaultValue={row.original.limit}
-          id={`${String(row.original.id)}-limit`}
-        />
-      </form>
+      <EditableCell row={row.original} field="limit" />
     ),
   },
   {
