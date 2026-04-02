@@ -1,11 +1,13 @@
 "use client";
 
 import {
+  IconDatabase,
   IconDots,
+  IconFileWord,
   IconFolder,
+  IconReport,
   IconShare3,
   IconTrash,
-  type Icon,
 } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -26,15 +28,13 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-export function NavDocuments({
-  items,
-}: {
-  items: {
-    name: string;
-    url: string;
-    icon: Icon;
-  }[];
-}) {
+const items = [
+  { name: "Data Library", url: "#", icon: IconDatabase },
+  { name: "Reports", url: "#", icon: IconReport },
+  { name: "Word Assistant", url: "#", icon: IconFileWord },
+];
+
+export function NavDocuments() {
   const { isMobile } = useSidebar();
 
   return (

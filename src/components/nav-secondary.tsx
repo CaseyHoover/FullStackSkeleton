@@ -1,6 +1,11 @@
 "use client";
 
-import { IconBrightness, type Icon } from "@tabler/icons-react";
+import {
+  IconBrightness,
+  IconHelp,
+  IconSearch,
+  IconSettings,
+} from "@tabler/icons-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import * as React from "react";
@@ -14,23 +19,19 @@ import {
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Switch } from "@/components/ui/switch";
+import { useMounted } from "@/hooks/use-mounted";
 
-export function NavSecondary({
-  items,
-  ...props
-}: {
-  items: {
-    title: string;
-    url: string;
-    icon: Icon;
-  }[];
-} & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
+const items = [
+  { title: "Settings", url: "#", icon: IconSettings },
+  { title: "Get Help", url: "#", icon: IconHelp },
+  { title: "Search", url: "#", icon: IconSearch },
+];
+
+export function NavSecondary(
+  props: Omit<React.ComponentPropsWithoutRef<typeof SidebarGroup>, "children">,
+) {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   return (
     <SidebarGroup {...props}>

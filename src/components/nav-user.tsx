@@ -24,16 +24,17 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { authClient } from "@/lib/auth-client";
 
-export function NavUser({
-  user,
-}: {
+interface NavUserProps {
   user: {
     name: string;
     email: string;
-    avatar: string;
+    image?: string | null;
   };
-}) {
+}
+
+export function NavUser({ user }: NavUserProps) {
   const { isMobile } = useSidebar();
 
   return (
@@ -52,8 +53,10 @@ export function NavUser({
             }
           >
             <Avatar className="size-8 rounded-lg grayscale">
-              <AvatarImage src={user.avatar} alt={user.name} />
-              <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+              <AvatarImage src={user.image ?? undefined} alt={user.name} />
+              <AvatarFallback className="rounded-lg">
+                {user.name.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm/tight">
               <span className="truncate font-medium">{user.name}</span>
@@ -77,8 +80,10 @@ export function NavUser({
                   flex items-center gap-2 px-1 py-1.5 text-left text-sm
                 ">
                   <Avatar className="size-8 rounded-lg">
-                    <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                    <AvatarImage src={user.image ?? undefined} alt={user.name} />
+                    <AvatarFallback className="rounded-lg">
+                      {user.name.slice(0, 2).toUpperCase()}
+                    </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm/tight">
                     <span className="truncate font-medium">{user.name}</span>
@@ -105,7 +110,11 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                void authClient.signOut({ fetchOptions: { onSuccess: () => { window.location.assign("/sign-in"); } } });
+              }}
+            >
               <IconLogout />
               Log out
             </DropdownMenuItem>
