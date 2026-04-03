@@ -2,6 +2,7 @@ import { IconInnerShadowTop } from "@tabler/icons-react";
 import Link from "next/link";
 import * as React from "react";
 
+import { NavAdmin } from "@/app/(shell)/_components/nav-admin";
 import { NavDocuments } from "@/app/(shell)/_components/nav-documents";
 import { NavMain } from "@/app/(shell)/_components/nav-main";
 import { NavUser } from "@/app/(shell)/_components/nav-user";
@@ -40,6 +41,7 @@ export async function AppSidebar({
       <SidebarContent>
         <NavMain />
         <NavDocuments />
+        <NavAdmin />
       </SidebarContent>
       {session?.user && (
         <SidebarFooter>
