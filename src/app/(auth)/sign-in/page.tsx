@@ -2,6 +2,7 @@
 
 import { IconBrandGithub } from "@tabler/icons-react";
 
+import { authClient } from "@/auth/client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { authClient } from "@/lib/auth-client";
 
 export default function SignInPage() {
   return (
@@ -26,7 +26,7 @@ export default function SignInPage() {
             onClick={() => {
               void authClient.signIn.social({
                 provider: "github",
-                callbackURL: "/",
+                callbackURL: "/dashboard",
               });
             }}
           >
