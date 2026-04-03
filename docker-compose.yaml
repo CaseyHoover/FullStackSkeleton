@@ -5,9 +5,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: healthdash
-      POSTGRES_PASSWORD: healthdash
-      POSTGRES_DB: healthdash
+      POSTGRES_USER: skeleton
+      POSTGRES_PASSWORD: skeleton
+      POSTGRES_DB: skeleton
     volumes:
       - pgdata:/var/lib/postgresql/data
 

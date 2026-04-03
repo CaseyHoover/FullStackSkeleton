@@ -1,6 +1,6 @@
-# HealthDash
+# FullStackSkeleton
 
-A personal health dashboard built as a pnpm monorepo with Turborepo.
+A full-stack application skeleton built as a pnpm monorepo with Turborepo.
 
 ## Architecture
 
@@ -50,7 +50,7 @@ A personal health dashboard built as a pnpm monorepo with Turborepo.
 
 ```bash
 git clone <repo-url>
-cd health-dashboard
+cd fullstack-skeleton
 pnpm install
 ```
 
@@ -68,7 +68,7 @@ GITHUB_CLIENT_ID=<your-client-id>
 GITHUB_CLIENT_SECRET=<your-client-secret>
 
 # Database
-DATABASE_URL=postgresql://healthdash:healthdash@localhost:5432/healthdash
+DATABASE_URL=postgresql://skeleton:skeleton@localhost:5432/skeleton
 
 # API (optional, defaults shown)
 NEXT_PUBLIC_API_URL=http://localhost:4000
@@ -84,8 +84,8 @@ For the GitHub OAuth app, set the callback URL to `http://localhost:3000/api/aut
 
 ```bash
 docker compose up -d
-pnpm --filter @health/db db:generate
-pnpm --filter @health/db db:push
+pnpm --filter @skeleton/db db:generate
+pnpm --filter @skeleton/db db:push
 ```
 
 ### 4. Run the dev servers
@@ -111,8 +111,8 @@ This starts:
 | `pnpm dev` | Start all services (Postgres + web + API + Prisma Studio) |
 | `pnpm build` | Build all packages and apps |
 | `pnpm lint` | Lint all packages |
-| `pnpm --filter @health/db db:push` | Push Prisma schema to database |
-| `pnpm --filter @health/db studio` | Open Prisma Studio standalone |
+| `pnpm --filter @skeleton/db db:push` | Push Prisma schema to database |
+| `pnpm --filter @skeleton/db studio` | Open Prisma Studio standalone |
 | `pnpm codegen:openapi` | Generate OpenAPI spec from Hono routes |
 | `pnpm codegen:swift` | Generate Swift types from OpenAPI spec |
 | `pnpm docker:up` | Start Postgres container |
