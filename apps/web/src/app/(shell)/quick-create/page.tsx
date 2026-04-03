@@ -44,7 +44,7 @@ export default function QuickCreatePage() {
   const { createDocument } = useCreateDocument();
   const [pending, setPending] = React.useState(false);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
 
@@ -75,10 +75,12 @@ export default function QuickCreatePage() {
   }
 
   return (
-    <div className="
-      flex flex-1 flex-col gap-6 px-4 py-6
-      lg:px-6
-    ">
+    <div
+      className="
+        flex flex-1 flex-col gap-6 px-4 py-6
+        lg:px-6
+      "
+    >
       <div>
         <h1 className="text-2xl font-semibold">Quick Create</h1>
         <p className="mt-1 text-muted-foreground">
@@ -90,10 +92,20 @@ export default function QuickCreatePage() {
           <CardTitle>New Document</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={(e) => { void handleSubmit(e); }} className="flex flex-col gap-4">
+          <form
+            onSubmit={(e) => {
+              void handleSubmit(e);
+            }}
+            className="flex flex-col gap-4"
+          >
             <div className="flex flex-col gap-2">
               <Label htmlFor="header">Header</Label>
-              <Input id="header" name="header" placeholder="Document title" required />
+              <Input
+                id="header"
+                name="header"
+                placeholder="Document title"
+                required
+              />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-2">
@@ -104,7 +116,9 @@ export default function QuickCreatePage() {
                   </SelectTrigger>
                   <SelectContent>
                     {documentTypes.map((t) => (
-                      <SelectItem key={t} value={t}>{t}</SelectItem>
+                      <SelectItem key={t} value={t}>
+                        {t}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -139,9 +153,13 @@ export default function QuickCreatePage() {
                   <SelectValue placeholder="Assign reviewer" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Assign reviewer">Assign reviewer</SelectItem>
+                  <SelectItem value="Assign reviewer">
+                    Assign reviewer
+                  </SelectItem>
                   {reviewers.map((r) => (
-                    <SelectItem key={r} value={r}>{r}</SelectItem>
+                    <SelectItem key={r} value={r}>
+                      {r}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>

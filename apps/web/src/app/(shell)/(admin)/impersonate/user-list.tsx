@@ -49,7 +49,7 @@ export function UserList({ currentUserId }: { currentUserId: string }) {
 
   React.useEffect(() => {
     loadUsers();
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- only on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only on mount
   }, []);
 
   function handleImpersonate(userId: string) {
@@ -63,7 +63,7 @@ export function UserList({ currentUserId }: { currentUserId: string }) {
     });
   }
 
-  async function handleCreate(e: React.FormEvent<HTMLFormElement>) {
+  async function handleCreate(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const name = form.get("name") as string;
@@ -97,7 +97,9 @@ export function UserList({ currentUserId }: { currentUserId: string }) {
             size="sm"
             variant="outline"
             className="h-7 gap-1 text-xs"
-            onClick={() => { setShowCreate(!showCreate); }}
+            onClick={() => {
+              setShowCreate(!showCreate);
+            }}
           >
             <IconPlus className="size-3.5" />
             Create Test User
@@ -105,20 +107,44 @@ export function UserList({ currentUserId }: { currentUserId: string }) {
         </CardHeader>
         {showCreate && (
           <CardContent className="border-b pb-4">
-            <form onSubmit={(e) => { void handleCreate(e); }} className="flex flex-col gap-3">
+            <form
+              onSubmit={(e) => {
+                void handleCreate(e);
+              }}
+              className="flex flex-col gap-3"
+            >
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="name" className="text-xs">Name</Label>
-                  <Input id="name" name="name" placeholder="Jane Doe" required className="h-8 text-sm" />
+                  <Label htmlFor="name" className="text-xs">
+                    Name
+                  </Label>
+                  <Input
+                    id="name"
+                    name="name"
+                    placeholder="Jane Doe"
+                    required
+                    className="h-8 text-sm"
+                  />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="email" className="text-xs">Email</Label>
-                  <Input id="email" name="email" type="email" placeholder="jane@example.com" required className="h-8 text-sm" />
+                  <Label htmlFor="email" className="text-xs">
+                    Email
+                  </Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="jane@example.com"
+                    required
+                    className="h-8 text-sm"
+                  />
                 </div>
               </div>
               <div className="flex items-end gap-3">
                 <div className="flex flex-1 flex-col gap-1.5">
-                  <Label htmlFor="role" className="text-xs">Role</Label>
+                  <Label htmlFor="role" className="text-xs">
+                    Role
+                  </Label>
                   <Select name="role" defaultValue="user">
                     <SelectTrigger id="role" className="h-8 text-sm">
                       <SelectValue />
@@ -129,7 +155,12 @@ export function UserList({ currentUserId }: { currentUserId: string }) {
                     </SelectContent>
                   </Select>
                 </div>
-                <Button type="submit" size="sm" className="h-8" disabled={creating}>
+                <Button
+                  type="submit"
+                  size="sm"
+                  className="h-8"
+                  disabled={creating}
+                >
                   {creating ? "Creating..." : "Create"}
                 </Button>
               </div>
@@ -140,30 +171,43 @@ export function UserList({ currentUserId }: { currentUserId: string }) {
           {loading ? (
             <p className="text-sm text-muted-foreground">Loading users...</p>
           ) : users.length === 0 ? (
-            <p className="text-sm text-muted-foreground">No other users found. Create a test user above.</p>
+            <p className="text-sm text-muted-foreground">
+              No other users found. Create a test user above.
+            </p>
           ) : (
             <div className="flex flex-col divide-y">
               {users.map((user) => (
                 <div
                   key={user.id}
-                  className="flex items-center gap-3 py-3 first:pt-0 last:pb-0"
+                  className="
+                    flex items-center gap-3 py-3
+                    first:pt-0
+                    last:pb-0
+                  "
                 >
                   <Avatar className="size-8 rounded-lg">
-                    <AvatarImage src={user.image ?? undefined} alt={user.name} />
+                    <AvatarImage
+                      src={user.image ?? undefined}
+                      alt={user.name}
+                    />
                     <AvatarFallback className="rounded-lg text-xs">
                       {user.name.slice(0, 2).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
                     <div className="text-sm font-medium">{user.name}</div>
-                    <div className="text-xs text-muted-foreground">{user.email}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {user.email}
+                    </div>
                   </div>
                   <Badge variant="outline">{user.role ?? "user"}</Badge>
                   <Button
                     size="sm"
                     variant="outline"
                     className="h-7 gap-1 text-xs"
-                    onClick={() => { handleImpersonate(user.id); }}
+                    onClick={() => {
+                      handleImpersonate(user.id);
+                    }}
                   >
                     <IconUserCheck className="size-3.5" />
                     Impersonate
