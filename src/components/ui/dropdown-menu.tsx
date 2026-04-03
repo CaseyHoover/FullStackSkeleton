@@ -7,8 +7,8 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 
-function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {
-  return <MenuPrimitive.Root data-slot="dropdown-menu" {...props} />;
+function DropdownMenu({ modal = false, ...props }: MenuPrimitive.Root.Props) {
+  return <MenuPrimitive.Root data-slot="dropdown-menu" modal={modal} {...props} />;
 }
 
 function DropdownMenuPortal({ ...props }: MenuPrimitive.Portal.Props) {
@@ -110,8 +110,8 @@ function DropdownMenuItem({
       data-variant={variant}
       className={cn(
         `
-          group/dropdown-menu-item relative flex cursor-default items-center
-          gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none
+          group/dropdown-menu-item relative flex items-center gap-1.5 rounded-md
+          px-1.5 py-1 text-sm outline-hidden select-none
           focus:bg-accent focus:text-accent-foreground
           not-data-[variant=destructive]:focus:**:text-accent-foreground
           data-inset:pl-7
@@ -149,8 +149,8 @@ function DropdownMenuSubTrigger({
       data-inset={inset}
       className={cn(
         `
-          flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1
-          text-sm outline-hidden select-none
+          flex items-center gap-1.5 rounded-md px-1.5 py-1 text-sm
+          outline-hidden select-none
           focus:bg-accent focus:text-accent-foreground
           not-data-[variant=destructive]:focus:**:text-accent-foreground
           data-inset:pl-7
@@ -217,8 +217,8 @@ function DropdownMenuCheckboxItem({
       data-inset={inset}
       className={cn(
         `
-          relative flex cursor-default items-center gap-1.5 rounded-md py-1 pr-8
-          pl-1.5 text-sm outline-hidden select-none
+          relative flex items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm
+          outline-hidden select-none
           focus:bg-accent focus:text-accent-foreground
           focus:**:text-accent-foreground
           data-inset:pl-7
@@ -269,8 +269,8 @@ function DropdownMenuRadioItem({
       data-inset={inset}
       className={cn(
         `
-          relative flex cursor-default items-center gap-1.5 rounded-md py-1 pr-8
-          pl-1.5 text-sm outline-hidden select-none
+          relative flex items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm
+          outline-hidden select-none
           focus:bg-accent focus:text-accent-foreground
           focus:**:text-accent-foreground
           data-inset:pl-7

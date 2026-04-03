@@ -7,7 +7,11 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 
-const Select = SelectPrimitive.Root;
+function Select<Value, Multiple extends boolean | undefined = false>(
+  props: SelectPrimitive.Root.Props<Value, Multiple>,
+) {
+  return <SelectPrimitive.Root<Value, Multiple> modal={false} {...props} />;
+}
 
 function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
   return (
@@ -89,14 +93,16 @@ function SelectContent({
   align = "center",
   alignOffset = 0,
   alignItemWithTrigger = true,
+  portal = true,
   ...props
 }: SelectPrimitive.Popup.Props &
   Pick<
     SelectPrimitive.Positioner.Props,
     "align" | "alignOffset" | "side" | "sideOffset" | "alignItemWithTrigger"
-  >) {
+  > & { portal?: boolean }) {
+  const Wrapper = portal ? SelectPrimitive.Portal : React.Fragment;
   return (
-    <SelectPrimitive.Portal>
+    <Wrapper>
       <SelectPrimitive.Positioner
         side={side}
         sideOffset={sideOffset}
@@ -135,7 +141,7 @@ function SelectContent({
           <SelectScrollDownButton />
         </SelectPrimitive.Popup>
       </SelectPrimitive.Positioner>
-    </SelectPrimitive.Portal>
+    </Wrapper>
   );
 }
 
@@ -162,8 +168,8 @@ function SelectItem({
       data-slot="select-item"
       className={cn(
         `
-          relative flex w-full cursor-default items-center gap-1.5 rounded-md
-          py-1 pr-8 pl-1.5 text-sm outline-hidden select-none
+          relative flex w-full items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5
+          text-sm outline-hidden select-none
           focus:bg-accent focus:text-accent-foreground
           not-data-[variant=destructive]:focus:**:text-accent-foreground
           data-disabled:pointer-events-none data-disabled:opacity-50
