@@ -1,16 +1,13 @@
 "use client";
 
 import {
-  IconChartBar,
   IconCirclePlusFilled,
   IconDashboard,
-  IconFolder,
   IconListDetails,
-  IconMail,
-  IconUsers,
 } from "@tabler/icons-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -20,19 +17,17 @@ import {
 } from "@/components/ui/sidebar";
 
 const items = [
-  { title: "Dashboard", url: "#", icon: IconDashboard },
-  { title: "Lifecycle", url: "#", icon: IconListDetails },
-  { title: "Analytics", url: "#", icon: IconChartBar },
-  { title: "Projects", url: "#", icon: IconFolder },
-  { title: "Team", url: "#", icon: IconUsers },
+  { title: "Dashboard", url: "/dashboard", icon: IconDashboard },
+  { title: "Lifecycle", url: "/lifecycle", icon: IconListDetails },
 ];
 
 export function NavMain() {
+  const pathname = usePathname();
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
-          <SidebarMenuItem className="flex items-center gap-2">
+          <SidebarMenuItem>
             <SidebarMenuButton
               tooltip="Quick Create"
               className="
@@ -41,27 +36,17 @@ export function NavMain() {
                 hover:bg-primary/90 hover:text-primary-foreground
                 active:bg-primary/90 active:text-primary-foreground
               "
+              render={<Link href="/quick-create" />}
             >
               <IconCirclePlusFilled />
               <span>Quick Create</span>
             </SidebarMenuButton>
-            <Button
-              size="icon"
-              className="
-                size-8
-                group-data-[collapsible=icon]:opacity-0
-              "
-              variant="outline"
-            >
-              <IconMail />
-              <span className="sr-only">Inbox</span>
-            </Button>
           </SidebarMenuItem>
         </SidebarMenu>
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title}>
+              <SidebarMenuButton tooltip={item.title} isActive={pathname === item.url} render={<Link href={item.url} />}>
                 <item.icon />
                 <span>{item.title}</span>
               </SidebarMenuButton>

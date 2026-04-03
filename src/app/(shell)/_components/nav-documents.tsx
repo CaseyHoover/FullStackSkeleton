@@ -1,15 +1,14 @@
 "use client";
 
 import {
-  IconDatabase,
   IconDots,
-  IconFileWord,
   IconFolder,
   IconReport,
   IconShare3,
   IconTrash,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   DropdownMenu,
@@ -29,13 +28,12 @@ import {
 } from "@/components/ui/sidebar";
 
 const items = [
-  { name: "Data Library", url: "#", icon: IconDatabase },
-  { name: "Reports", url: "#", icon: IconReport },
-  { name: "Word Assistant", url: "#", icon: IconFileWord },
+  { name: "Reports", url: "/reports", icon: IconReport },
 ];
 
 export function NavDocuments() {
   const { isMobile } = useSidebar();
+  const pathname = usePathname();
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
@@ -43,7 +41,7 @@ export function NavDocuments() {
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton render={<Link href={item.url} />}>
+            <SidebarMenuButton isActive={pathname === item.url} render={<Link href={item.url} />}>
               <item.icon />
               <span>{item.name}</span>
             </SidebarMenuButton>
@@ -84,12 +82,6 @@ export function NavDocuments() {
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-        <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <IconDots className="text-sidebar-foreground/70" />
-            <span>More</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   );

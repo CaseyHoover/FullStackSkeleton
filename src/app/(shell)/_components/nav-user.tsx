@@ -1,20 +1,20 @@
 "use client";
 
 import {
-  IconCreditCard,
   IconDotsVertical,
   IconLogout,
-  IconNotification,
+  IconSettings,
   IconUserCircle,
 } from "@tabler/icons-react";
+import Link from "next/link";
 
+import { authClient } from "@/auth/client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -22,9 +22,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/ui/sidebar";
-import { authClient } from "@/lib/auth-client";
 
 interface NavUserProps {
   user: {
@@ -35,7 +33,6 @@ interface NavUserProps {
 }
 
 export function NavUser({ user }: NavUserProps) {
-  const { isMobile } = useSidebar();
 
   return (
     <SidebarMenu>
@@ -52,7 +49,7 @@ export function NavUser({ user }: NavUserProps) {
               />
             }
           >
-            <Avatar className="size-8 rounded-lg grayscale">
+            <Avatar className="size-8 rounded-lg">
               <AvatarImage src={user.image ?? undefined} alt={user.name} />
               <AvatarFallback className="rounded-lg">
                 {user.name.slice(0, 2).toUpperCase()}
@@ -60,9 +57,6 @@ export function NavUser({ user }: NavUserProps) {
             </Avatar>
             <div className="grid flex-1 text-left text-sm/tight">
               <span className="truncate font-medium">{user.name}</span>
-              <span className="truncate text-xs text-muted-foreground">
-                {user.email}
-              </span>
             </div>
             <IconDotsVertical className="ml-auto size-4" />
           </DropdownMenuTrigger>
@@ -70,43 +64,18 @@ export function NavUser({ user }: NavUserProps) {
             className="
               w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg
             "
-            side={isMobile ? "bottom" : "right"}
+            side="top"
             align="end"
             sideOffset={4}
           >
             <DropdownMenuGroup>
-              <DropdownMenuLabel className="p-0 font-normal">
-                <div className="
-                  flex items-center gap-2 px-1 py-1.5 text-left text-sm
-                ">
-                  <Avatar className="size-8 rounded-lg">
-                    <AvatarImage src={user.image ?? undefined} alt={user.name} />
-                    <AvatarFallback className="rounded-lg">
-                      {user.name.slice(0, 2).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="grid flex-1 text-left text-sm/tight">
-                    <span className="truncate font-medium">{user.name}</span>
-                    <span className="truncate text-xs text-muted-foreground">
-                      {user.email}
-                    </span>
-                  </div>
-                </div>
-              </DropdownMenuLabel>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem render={<Link href="/account" />}>
                 <IconUserCircle />
                 Account
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <IconCreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <IconNotification />
-                Notifications
+              <DropdownMenuItem render={<Link href="/settings" />}>
+                <IconSettings />
+                Settings
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
