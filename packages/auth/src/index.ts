@@ -16,7 +16,6 @@ export const auth = betterAuth({
   plugins: [
     admin({
       defaultRole: "user",
-      adminUserIds: process.env.ADMIN_USER_IDS?.split(",") ?? [],
     }),
   ],
 });

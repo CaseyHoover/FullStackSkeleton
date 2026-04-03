@@ -72,10 +72,6 @@ DATABASE_URL=postgresql://skeleton:skeleton@localhost:5432/skeleton
 
 # API (optional, defaults shown)
 NEXT_PUBLIC_API_URL=http://localhost:4000
-
-# Admin (comma-separated user IDs — sign in first, then find your ID
-# at http://localhost:5555 in the User table)
-ADMIN_USER_IDS=<your-user-id>
 ```
 
 For the GitHub OAuth app, set the callback URL to `http://localhost:3000/api/auth/callback/github`.
@@ -95,9 +91,20 @@ pnpm dev
 ```
 
 This starts:
+
 - **Web** at http://localhost:3000
 - **API** at http://localhost:4000
 - **Prisma Studio** at http://localhost:5555
+
+### 5. Promote yourself to admin
+
+After your first sign-in, promote your user to admin:
+
+```bash
+docker exec $(docker ps -q --filter ancestor=postgres:17-alpine) \
+  psql -U skeleton -d skeleton -c \
+  "UPDATE \"user\" SET role = 'admin' WHERE email = '<your-email>';"
+```
 
 ### Admin tools (available in the sidebar when signed in)
 
@@ -106,14 +113,14 @@ This starts:
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `pnpm dev` | Start all services (Postgres + web + API + Prisma Studio) |
-| `pnpm build` | Build all packages and apps |
-| `pnpm lint` | Lint all packages |
-| `pnpm --filter @skeleton/db db:push` | Push Prisma schema to database |
-| `pnpm --filter @skeleton/db studio` | Open Prisma Studio standalone |
-| `pnpm codegen:openapi` | Generate OpenAPI spec from Hono routes |
-| `pnpm codegen:swift` | Generate Swift types from OpenAPI spec |
-| `pnpm docker:up` | Start Postgres container |
-| `pnpm docker:down` | Stop Postgres container |
+| Command                              | Description                                               |
+| ------------------------------------ | --------------------------------------------------------- |
+| `pnpm dev`                           | Start all services (Postgres + web + API + Prisma Studio) |
+| `pnpm build`                         | Build all packages and apps                               |
+| `pnpm lint`                          | Lint all packages                                         |
+| `pnpm --filter @skeleton/db db:push` | Push Prisma schema to database                            |
+| `pnpm --filter @skeleton/db studio`  | Open Prisma Studio standalone                             |
+| `pnpm codegen:openapi`               | Generate OpenAPI spec from Hono routes                    |
+| `pnpm codegen:swift`                 | Generate Swift types from OpenAPI spec                    |
+| `pnpm docker:up`                     | Start Postgres container                                  |
+| `pnpm docker:down`                   | Stop Postgres container                                   |
