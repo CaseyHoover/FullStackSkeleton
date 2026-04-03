@@ -1,0 +1,14 @@
+{
+  "name": "@health/api-spec",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "codegen:openapi": "tsx scripts/generate-spec.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5",
+    "yaml": "^2.7.0"
+  }
+}

@@ -1,3 +1,6 @@
 .next
 node_modules
-package-lock.json
+dist
+pnpm-lock.yaml
+apps/ios/HealthDash/Generated
+packages/api-spec/openapi.yaml

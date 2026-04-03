@@ -1,0 +1,22 @@
+{
+  "name": "@health/auth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./next": "./src/next.ts"
+  },
+  "scripts": {
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "better-auth": "^1.5.6"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}

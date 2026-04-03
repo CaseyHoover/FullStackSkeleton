@@ -1,0 +1,6 @@
+generatorName: swift6
+inputSpec: ../../packages/api-spec/openapi.yaml
+outputDir: ./HealthDash/Generated
+additionalProperties:
+  projectName: HealthDashAPI
+  library: urlsession

@@ -1,0 +1,11 @@
+{
+  "name": "@health/ios",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "codegen:swift": "openapi-generator-cli generate -c openapi-generator-config.yaml"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.16.0"
+  }
+}
