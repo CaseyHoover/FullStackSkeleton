@@ -52,7 +52,8 @@ const lightCSS = `
 
 // Dark theme — match app's dark mode palette
 const darkCSS = `
-  html, body, .swagger-ui, .swagger-ui .scheme-container, .swagger-ui .wrapper { background: #000000 !important; margin: 0; color: #ffffff; }
+  html, body, .swagger-ui, .swagger-ui .scheme-container { background: #000000 !important; margin: 0; color: #ffffff; }
+  .swagger-ui .wrapper { background: #000000 !important; color: #ffffff; }
   .swagger-ui .topbar { display: none; }
   .swagger-ui, .swagger-ui *:not(.microlight *):not(.microlight):not(.highlight-code *):not(code *) { color: #ffffff !important; }
   .swagger-ui a { color: #2aaa9a !important; }
