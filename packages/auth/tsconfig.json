@@ -2,7 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "../..",
+    "noEmit": true,
+    "paths": {
+      "@health/db": ["../db/src/index.ts"]
+    }
   },
   "include": ["src/**/*.ts"]
 }
