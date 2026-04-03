@@ -1,7 +1,7 @@
+import { auth } from "@health/auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import { auth } from "@health/auth";
 
 const publicPaths = new Set(["/", "/sign-in"]);
 
