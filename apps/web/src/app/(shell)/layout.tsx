@@ -16,7 +16,10 @@ export default async function DashboardLayout({
   const isImpersonating = Boolean(session?.session.impersonatedBy);
 
   return (
-    <SidebarProvider defaultOpen={defaultOpen} className="[--sidebar-width:--spacing(72)]">
+    <SidebarProvider
+      defaultOpen={defaultOpen}
+      className="[--sidebar-width:--spacing(72)]"
+    >
       <AppSidebar variant="inset" />
       <SidebarInset>
         <SiteHeader isImpersonating={isImpersonating} />

@@ -2,7 +2,6 @@ import { auth } from "@health/auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-
 const publicPaths = new Set(["/", "/sign-in"]);
 
 function isPublic(pathname: string) {

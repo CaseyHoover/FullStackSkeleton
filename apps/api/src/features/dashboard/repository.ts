@@ -1,5 +1,9 @@
 import { prisma } from "@health/db";
-import type { CreateDocument, SummaryCard, VisitorDataPoint } from "@health/shared";
+import type {
+  CreateDocument,
+  SummaryCard,
+  VisitorDataPoint,
+} from "@health/shared";
 
 import summaryData from "./data/summary-cards.json" with { type: "json" };
 import visitorsData from "./data/visitors.json" with { type: "json" };

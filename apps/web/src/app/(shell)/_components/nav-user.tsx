@@ -33,7 +33,6 @@ interface NavUserProps {
 }
 
 export function NavUser({ user }: NavUserProps) {
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -81,7 +80,13 @@ export function NavUser({ user }: NavUserProps) {
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
-                void authClient.signOut({ fetchOptions: { onSuccess: () => { window.location.assign("/sign-in"); } } });
+                void authClient.signOut({
+                  fetchOptions: {
+                    onSuccess: () => {
+                      window.location.assign("/sign-in");
+                    },
+                  },
+                });
               }}
             >
               <IconLogout />

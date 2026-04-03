@@ -6,9 +6,10 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-
 function DropdownMenu({ modal = false, ...props }: MenuPrimitive.Root.Props) {
-  return <MenuPrimitive.Root data-slot="dropdown-menu" modal={modal} {...props} />;
+  return (
+    <MenuPrimitive.Root data-slot="dropdown-menu" modal={modal} {...props} />
+  );
 }
 
 function DropdownMenuPortal({ ...props }: MenuPrimitive.Portal.Props) {

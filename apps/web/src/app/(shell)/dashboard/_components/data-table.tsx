@@ -225,10 +225,12 @@ const columns: ColumnDef<Document>[] = [
     cell: ({ row }) => (
       <Badge variant="outline" className="px-1.5 text-muted-foreground">
         {row.original.status === "Done" ? (
-          <IconCircleCheckFilled className="
-            fill-green-500
-            dark:fill-green-400
-          " />
+          <IconCircleCheckFilled
+            className="
+              fill-green-500
+              dark:fill-green-400
+            "
+          />
         ) : (
           <IconLoader />
         )}
@@ -423,10 +425,12 @@ export function DataTable() {
 
   if (isLoading) {
     return (
-      <div className="
-        flex flex-col gap-4 px-4 py-6
-        lg:px-6
-      ">
+      <div
+        className="
+          flex flex-col gap-4 px-4 py-6
+          lg:px-6
+        "
+      >
         <div className="flex items-center justify-between">
           <Skeleton className="h-8 w-40" />
           <Skeleton className="h-8 w-24" />
@@ -468,10 +472,12 @@ export function DataTable() {
       defaultValue="outline"
       className="w-full flex-col justify-start gap-6"
     >
-      <div className="
-        flex items-center justify-between px-4
-        lg:px-6
-      ">
+      <div
+        className="
+          flex items-center justify-between px-4
+          lg:px-6
+        "
+      >
         <Label htmlFor="view-selector" className="sr-only">
           View
         </Label>
@@ -493,12 +499,15 @@ export function DataTable() {
             <SelectItem value="focus-documents">Focus Documents</SelectItem>
           </SelectContent>
         </Select>
-        <TabsList className="
-          hidden
-          **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full
-          **:data-[slot=badge]:bg-muted-foreground/30 **:data-[slot=badge]:px-1
-          @4xl/main:flex
-        ">
+        <TabsList
+          className="
+            hidden
+            **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full
+            **:data-[slot=badge]:bg-muted-foreground/30
+            **:data-[slot=badge]:px-1
+            @4xl/main:flex
+          "
+        >
           <TabsTrigger value="outline">Outline</TabsTrigger>
           <TabsTrigger value="past-performance">
             Past Performance <Badge variant="secondary">3</Badge>
@@ -514,10 +523,14 @@ export function DataTable() {
               render={<Button variant="outline" size="sm" />}
             >
               <IconLayoutColumns />
-              <span className="
-                hidden
-                lg:inline
-              ">Customize Columns</span>
+              <span
+                className="
+                  hidden
+                  lg:inline
+                "
+              >
+                Customize Columns
+              </span>
               <span className="lg:hidden">Columns</span>
               <IconChevronDown />
             </DropdownMenuTrigger>
@@ -547,10 +560,14 @@ export function DataTable() {
           </DropdownMenu>
           <Button variant="outline" size="sm">
             <IconPlus />
-            <span className="
-              hidden
-              lg:inline
-            ">Add Section</span>
+            <span
+              className="
+                hidden
+                lg:inline
+              "
+            >
+              Add Section
+            </span>
           </Button>
         </div>
       </div>
@@ -613,21 +630,27 @@ export function DataTable() {
           </DndContext>
         </div>
         <div className="flex items-center justify-between px-4">
-          <div className="
-            hidden flex-1 text-sm text-muted-foreground
-            lg:flex
-          ">
+          <div
+            className="
+              hidden flex-1 text-sm text-muted-foreground
+              lg:flex
+            "
+          >
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
-          <div className="
-            flex w-full items-center gap-8
-            lg:w-fit
-          ">
-            <div className="
-              hidden items-center gap-2
-              lg:flex
-            ">
+          <div
+            className="
+              flex w-full items-center gap-8
+              lg:w-fit
+            "
+          >
+            <div
+              className="
+                hidden items-center gap-2
+                lg:flex
+              "
+            >
               <Label htmlFor="rows-per-page" className="text-sm font-medium">
                 Rows per page
               </Label>
@@ -651,16 +674,20 @@ export function DataTable() {
                 </SelectContent>
               </Select>
             </div>
-            <div className="
-              flex w-fit items-center justify-center text-sm font-medium
-            ">
+            <div
+              className="
+                flex w-fit items-center justify-center text-sm font-medium
+              "
+            >
               Page {table.getState().pagination.pageIndex + 1} of{" "}
               {table.getPageCount()}
             </div>
-            <div className="
-              ml-auto flex items-center gap-2
-              lg:ml-0
-            ">
+            <div
+              className="
+                ml-auto flex items-center gap-2
+                lg:ml-0
+              "
+            >
               <Button
                 variant="outline"
                 className="
@@ -725,17 +752,20 @@ export function DataTable() {
           lg:px-6
         "
       >
-        <div className="
-          aspect-video w-full flex-1 rounded-lg border border-dashed
-        "></div>
+        <div
+          className="aspect-video w-full flex-1 rounded-lg border border-dashed"
+        ></div>
       </TabsContent>
-      <TabsContent value="key-personnel" className="
-        flex flex-col px-4
-        lg:px-6
-      ">
-        <div className="
-          aspect-video w-full flex-1 rounded-lg border border-dashed
-        "></div>
+      <TabsContent
+        value="key-personnel"
+        className="
+          flex flex-col px-4
+          lg:px-6
+        "
+      >
+        <div
+          className="aspect-video w-full flex-1 rounded-lg border border-dashed"
+        ></div>
       </TabsContent>
       <TabsContent
         value="focus-documents"
@@ -744,9 +774,9 @@ export function DataTable() {
           lg:px-6
         "
       >
-        <div className="
-          aspect-video w-full flex-1 rounded-lg border border-dashed
-        "></div>
+        <div
+          className="aspect-video w-full flex-1 rounded-lg border border-dashed"
+        ></div>
       </TabsContent>
     </Tabs>
   );

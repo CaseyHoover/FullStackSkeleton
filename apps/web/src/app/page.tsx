@@ -12,7 +12,11 @@ export default function HomePage() {
         </p>
       </div>
       <div className="flex gap-3">
-        <Button variant="outline" nativeButton={false} render={<Link href="/sign-in" />}>
+        <Button
+          variant="outline"
+          nativeButton={false}
+          render={<Link href="/sign-in" />}
+        >
           Sign in
         </Button>
         <Button nativeButton={false} render={<Link href="/sign-in" />}>

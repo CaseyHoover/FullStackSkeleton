@@ -12,10 +12,12 @@ export default async function ImpersonatePage() {
   }
 
   return (
-    <div className="
-      flex flex-1 flex-col gap-6 px-4 py-6
-      lg:px-6
-    ">
+    <div
+      className="
+        flex flex-1 flex-col gap-6 px-4 py-6
+        lg:px-6
+      "
+    >
       <div>
         <h1 className="text-2xl font-semibold">Impersonate User</h1>
         <p className="mt-1 text-muted-foreground">

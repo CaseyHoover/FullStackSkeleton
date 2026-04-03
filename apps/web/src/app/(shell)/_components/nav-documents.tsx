@@ -27,9 +27,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-const items = [
-  { name: "Reports", url: "/reports", icon: IconReport },
-];
+const items = [{ name: "Reports", url: "/reports", icon: IconReport }];
 
 export function NavDocuments() {
   const { isMobile } = useSidebar();
@@ -41,7 +39,11 @@ export function NavDocuments() {
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton tooltip={item.name} isActive={pathname === item.url} render={<Link href={item.url} />}>
+            <SidebarMenuButton
+              tooltip={item.name}
+              isActive={pathname === item.url}
+              render={<Link href={item.url} />}
+            >
               <item.icon />
               <span>{item.name}</span>
             </SidebarMenuButton>

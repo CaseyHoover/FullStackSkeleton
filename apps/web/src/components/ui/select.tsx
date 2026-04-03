@@ -6,7 +6,6 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-
 function Select<Value, Multiple extends boolean | undefined = false>(
   props: SelectPrimitive.Root.Props<Value, Multiple>,
 ) {
@@ -76,9 +75,9 @@ function SelectTrigger({
       {children}
       <SelectPrimitive.Icon
         render={
-          <ChevronDownIcon className="
-            pointer-events-none size-4 text-muted-foreground
-          " />
+          <ChevronDownIcon
+            className="pointer-events-none size-4 text-muted-foreground"
+          />
         }
       />
     </SelectPrimitive.Trigger>
@@ -181,17 +180,19 @@ function SelectItem({
       )}
       {...props}
     >
-      <SelectPrimitive.ItemText className="
-        flex flex-1 shrink-0 gap-2 whitespace-nowrap
-      ">
+      <SelectPrimitive.ItemText
+        className="flex flex-1 shrink-0 gap-2 whitespace-nowrap"
+      >
         {children}
       </SelectPrimitive.ItemText>
       <SelectPrimitive.ItemIndicator
         render={
-          <span className="
-            pointer-events-none absolute right-2 flex size-4 items-center
-            justify-center
-          " />
+          <span
+            className="
+              pointer-events-none absolute right-2 flex size-4 items-center
+              justify-center
+            "
+          />
         }
       >
         <CheckIcon className="pointer-events-none" />

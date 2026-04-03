@@ -88,9 +88,11 @@ const darkCSS = `
   .swagger-ui .highlight-code .microlight code { color: #ffffff !important; }
 `;
 
-app.get("/docs", swaggerUI({
-  url: "/openapi.json",
-  manuallySwaggerUIHtml: (asset: { css: string[]; js: string[] }) => `
+app.get(
+  "/docs",
+  swaggerUI({
+    url: "/openapi.json",
+    manuallySwaggerUIHtml: (asset: { css: string[]; js: string[] }) => `
     <div>
       <div id="swagger-ui"></div>
       ${asset.css.map((url: string) => `<link rel="stylesheet" href="${url}" />`).join("\n")}
@@ -106,10 +108,13 @@ app.get("/docs", swaggerUI({
       </script>
     </div>
   `,
-}));
-app.get("/docs/dark", swaggerUI({
-  url: "/openapi.json",
-  manuallySwaggerUIHtml: (asset: { css: string[]; js: string[] }) => `
+  }),
+);
+app.get(
+  "/docs/dark",
+  swaggerUI({
+    url: "/openapi.json",
+    manuallySwaggerUIHtml: (asset: { css: string[]; js: string[] }) => `
     <div>
       <div id="swagger-ui"></div>
       ${asset.css.map((url: string) => `<link rel="stylesheet" href="${url}" />`).join("\n")}
@@ -125,4 +130,5 @@ app.get("/docs/dark", swaggerUI({
       </script>
     </div>
   `,
-}));
+  }),
+);

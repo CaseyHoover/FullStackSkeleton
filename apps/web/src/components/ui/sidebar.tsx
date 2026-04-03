@@ -25,7 +25,6 @@ import {
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
-
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 const SIDEBAR_WIDTH = "16rem";
@@ -74,8 +73,9 @@ function SidebarProvider({
 
   // Sync from cookie on mount to persist sidebar state across navigations.
   React.useEffect(() => {
-    const match = new RegExp(`(?:^|; )${SIDEBAR_COOKIE_NAME}=([^;]*)`)
-      .exec(document.cookie);
+    const match = new RegExp(`(?:^|; )${SIDEBAR_COOKIE_NAME}=([^;]*)`).exec(
+      document.cookie,
+    );
     if (match) {
       _setOpen(match[1] === "true");
     }
@@ -118,7 +118,9 @@ function SidebarProvider({
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => { window.removeEventListener("keydown", handleKeyDown); };
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [toggleSidebar]);
 
   // We add a state so that we can do data-state="expanded" or "collapsed".
@@ -594,12 +596,11 @@ const sidebarMenuButtonVariants = cva(
     variants: {
       variant: {
         default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-        outline:
-          `
-            bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))]
-            hover:bg-sidebar-accent hover:text-sidebar-accent-foreground
-            hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]
-          `,
+        outline: `
+          bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))]
+          hover:bg-sidebar-accent hover:text-sidebar-accent-foreground
+          hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]
+        `,
       },
       size: {
         default: "h-8 text-sm",

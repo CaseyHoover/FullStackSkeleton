@@ -71,10 +71,12 @@ export function ChartAreaInteractive() {
           <Skeleton className="h-5 w-32" />
           <Skeleton className="h-4 w-48" />
         </CardHeader>
-        <CardContent className="
-          px-2 pt-4
-          sm:px-6 sm:pt-6
-        ">
+        <CardContent
+          className="
+            px-2 pt-4
+            sm:px-6 sm:pt-6
+          "
+        >
           <Skeleton className="h-62.5 w-full" />
         </CardContent>
       </Card>
@@ -86,10 +88,12 @@ export function ChartAreaInteractive() {
       <CardHeader>
         <CardTitle>Total Visitors</CardTitle>
         <CardDescription>
-          <span className="
-            hidden
-            @[540px]/card:block
-          ">
+          <span
+            className="
+              hidden
+              @[540px]/card:block
+            "
+          >
             Total for the last 3 months
           </span>
           <span className="@[540px]/card:hidden">Last 3 months</span>
@@ -98,7 +102,9 @@ export function ChartAreaInteractive() {
           <ToggleGroup
             multiple={false}
             value={timeRange ? [timeRange] : []}
-            onValueChange={(value) => { setTimeRange(value[0] ?? "90d"); }}
+            onValueChange={(value) => {
+              setTimeRange(value[0] ?? "90d");
+            }}
             variant="outline"
             className="
               hidden
@@ -112,7 +118,9 @@ export function ChartAreaInteractive() {
           </ToggleGroup>
           <Select
             value={timeRange}
-            onValueChange={(value) => { setTimeRange(value ?? "90d"); }}
+            onValueChange={(value) => {
+              setTimeRange(value ?? "90d");
+            }}
           >
             <SelectTrigger
               className="
@@ -140,10 +148,12 @@ export function ChartAreaInteractive() {
           </Select>
         </CardAction>
       </CardHeader>
-      <CardContent className="
-        px-2 pt-4
-        sm:px-6 sm:pt-6
-      ">
+      <CardContent
+        className="
+          px-2 pt-4
+          sm:px-6 sm:pt-6
+        "
+      >
         <ChartContainer
           config={chartConfig}
           className="aspect-auto h-62.5 w-full"

@@ -165,7 +165,9 @@ function ChartTooltipContent({
     const itemConfig = getPayloadConfigFromPayload(config, item, key);
     const labelConfig =
       !labelKey && typeof label === "string" ? config[label] : undefined;
-    const value = labelConfig ? (labelConfig.label ?? label) : itemConfig?.label;
+    const value = labelConfig
+      ? (labelConfig.label ?? label)
+      : itemConfig?.label;
 
     if (labelFormatter) {
       return (
@@ -277,9 +279,11 @@ function ChartTooltipContent({
                         </span>
                       </div>
                       {item.value != null && (
-                        <span className="
-                          font-mono font-medium text-foreground tabular-nums
-                        ">
+                        <span
+                          className="
+                            font-mono font-medium text-foreground tabular-nums
+                          "
+                        >
                           {typeof item.value === "number"
                             ? item.value.toLocaleString()
                             : String(item.value)}
