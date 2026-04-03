@@ -1,8 +1,11 @@
 "use client";
 
+import { IconUserOff } from "@tabler/icons-react";
 import { usePathname } from "next/navigation";
 
+import { authClient } from "@/auth/client";
 import { ModeToggle } from "@/app/(shell)/_components/mode-toggle";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
@@ -14,7 +17,7 @@ function titleFromPathname(pathname: string) {
     .join(" ");
 }
 
-export function SiteHeader() {
+export function SiteHeader({ isImpersonating = false }: { isImpersonating?: boolean }) {
   const pathname = usePathname();
 
   return (
@@ -37,6 +40,25 @@ export function SiteHeader() {
         />
         <h1 className="text-base font-medium">{titleFromPathname(pathname)}</h1>
         <div className="ml-auto flex items-center gap-2">
+          {isImpersonating && (
+            <Button
+              size="sm"
+              variant="outline"
+              className="h-7 gap-1.5 border-amber-500/50 bg-amber-500/10 text-xs text-amber-600 hover:bg-amber-500/20 dark:text-amber-400"
+              onClick={() => {
+                void authClient.admin.stopImpersonating({
+                  fetchOptions: {
+                    onSuccess: () => {
+                      window.location.reload();
+                    },
+                  },
+                });
+              }}
+            >
+              <IconUserOff className="size-3.5" />
+              Stop Impersonating
+            </Button>
+          )}
           <ModeToggle />
         </div>
       </div>

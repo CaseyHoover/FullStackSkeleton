@@ -1,6 +1,6 @@
 "use client";
 
-import { IconApi, IconDatabase } from "@tabler/icons-react";
+import { IconApi, IconDatabase, IconUserScan } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,16 +15,18 @@ import {
 const items = [
   { name: "API Docs", url: "/api-docs", icon: IconApi },
   { name: "DB Studio", url: "/db-studio", icon: IconDatabase },
+  { name: "Impersonate", url: "/impersonate", icon: IconUserScan, hideWhenImpersonating: true },
 ];
 
-export function NavAdmin() {
+export function NavAdmin({ isImpersonating = false }: { isImpersonating?: boolean }) {
   const pathname = usePathname();
+  const visibleItems = isImpersonating ? items.filter((i) => !i.hideWhenImpersonating) : items;
 
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Admin</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
+        {visibleItems.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton
               tooltip={item.name}
