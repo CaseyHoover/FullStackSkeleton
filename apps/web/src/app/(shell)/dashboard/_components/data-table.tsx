@@ -53,7 +53,7 @@ import * as React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import { toast } from "sonner";
 
-import { useDocuments } from "@/app/(shell)/dashboard/hooks";
+import { useDeleteDocument, useDocuments } from "@/app/(shell)/dashboard/hooks";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -289,34 +289,51 @@ const columns: ColumnDef<Document>[] = [
   },
   {
     id: "actions",
-    cell: () => (
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          render={
-            <Button
-              variant="ghost"
-              className="
-                flex size-8 text-muted-foreground
-                data-[state=open]:bg-muted
-              "
-              size="icon"
-            />
-          }
-        >
-          <IconDotsVertical />
-          <span className="sr-only">Open menu</span>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-32">
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem>Make a copy</DropdownMenuItem>
-          <DropdownMenuItem>Favorite</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
+    cell: ({ row }) => <RowActions id={row.original.id} />,
   },
 ];
+
+function RowActions({ id }: { id: number }) {
+  const { deleteDocument } = useDeleteDocument();
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        render={
+          <Button
+            variant="ghost"
+            className="
+              flex size-8 text-muted-foreground
+              data-[state=open]:bg-muted
+            "
+            size="icon"
+          />
+        }
+      >
+        <IconDotsVertical />
+        <span className="sr-only">Open menu</span>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-32">
+        <DropdownMenuItem>Edit</DropdownMenuItem>
+        <DropdownMenuItem>Make a copy</DropdownMenuItem>
+        <DropdownMenuItem>Favorite</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          variant="destructive"
+          onClick={() => {
+            toast.promise(deleteDocument(id), {
+              loading: "Deleting...",
+              success: "Document deleted",
+              error: "Failed to delete",
+            });
+          }}
+        >
+          Delete
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
 
 function DraggableRow({ row }: { row: Row<Document> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
