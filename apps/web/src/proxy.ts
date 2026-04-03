@@ -10,7 +10,12 @@ function isPublic(pathname: string) {
 }
 
 export async function proxy(request: NextRequest) {
-  const session = await auth.api.getSession({ headers: request.headers });
+  let session;
+  try {
+    session = await auth.api.getSession({ headers: request.headers });
+  } catch {
+    // Database unavailable — treat as unauthenticated
+  }
   const { pathname } = request.nextUrl;
 
   if (session && publicPaths.has(pathname)) {
