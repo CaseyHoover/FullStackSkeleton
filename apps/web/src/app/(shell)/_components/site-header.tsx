@@ -3,8 +3,8 @@
 import { IconUserOff } from "@tabler/icons-react";
 import { usePathname } from "next/navigation";
 
-import { authClient } from "@/auth/client";
 import { ModeToggle } from "@/app/(shell)/_components/mode-toggle";
+import { authClient } from "@/auth/client";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
@@ -17,19 +17,27 @@ function titleFromPathname(pathname: string) {
     .join(" ");
 }
 
-export function SiteHeader({ isImpersonating = false }: { isImpersonating?: boolean }) {
+export function SiteHeader({
+  isImpersonating = false,
+}: {
+  isImpersonating?: boolean;
+}) {
   const pathname = usePathname();
 
   return (
-    <header className="
-      flex h-(--header-height) shrink-0 items-center gap-2 border-b
-      transition-[width,height] ease-linear
-      group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)
-    ">
-      <div className="
-        flex w-full items-center gap-1 px-4
-        lg:gap-2 lg:px-6
-      ">
+    <header
+      className="
+        flex h-(--header-height) shrink-0 items-center gap-2 border-b
+        transition-[width,height] ease-linear
+        group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)
+      "
+    >
+      <div
+        className="
+          flex w-full items-center gap-1 px-4
+          lg:gap-2 lg:px-6
+        "
+      >
         <SidebarTrigger className="-ml-1" />
         <Separator
           orientation="vertical"
@@ -44,7 +52,12 @@ export function SiteHeader({ isImpersonating = false }: { isImpersonating?: bool
             <Button
               size="sm"
               variant="outline"
-              className="h-7 gap-1.5 border-amber-500/50 bg-amber-500/10 text-xs text-amber-600 hover:bg-amber-500/20 dark:text-amber-400"
+              className="
+                h-7 gap-1.5 border-amber-500/50 bg-amber-500/10 text-xs
+                text-amber-600
+                hover:bg-amber-500/20
+                dark:text-amber-400
+              "
               onClick={() => {
                 void authClient.admin.stopImpersonating({
                   fetchOptions: {
