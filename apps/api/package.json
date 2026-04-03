@@ -12,6 +12,7 @@
   "dependencies": {
     "@health/auth": "workspace:*",
     "@health/db": "workspace:*",
+    "@prisma/client": "^6.6.0",
     "@health/shared": "workspace:*",
     "@hono/node-server": "^1.14.0",
     "@hono/swagger-ui": "^0.6.1",

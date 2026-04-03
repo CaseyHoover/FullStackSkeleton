@@ -4,11 +4,12 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 
 import { authMiddleware } from "./middleware/auth.js";
+import type { AppEnv } from "./types.js";
 import { authRoutes } from "./features/auth/route.js";
 import { billingRoutes } from "./features/billing/route.js";
 import { dashboardRoutes } from "./features/dashboard/route.js";
 
-export const app = new OpenAPIHono();
+export const app = new OpenAPIHono<AppEnv>();
 
 app.use("*", logger());
 app.use(
