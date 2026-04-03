@@ -19,7 +19,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import type { paths } from "@health/api-client";
+import type { paths } from "@skeleton/api-client";
 import {
   IconChevronDown,
   IconChevronLeft,

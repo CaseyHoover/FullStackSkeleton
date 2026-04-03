@@ -7,7 +7,7 @@ import {
   DocumentsArraySchema,
   SummaryCardsArraySchema,
   VisitorsArraySchema,
-} from "@health/shared";
+} from "@skeleton/shared";
 
 import * as service from "./service.js";
 

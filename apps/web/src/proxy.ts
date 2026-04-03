@@ -1,4 +1,4 @@
-import { auth } from "@health/auth";
+import { auth } from "@skeleton/auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 

@@ -22,7 +22,7 @@
       "cache": false
     },
     "codegen:openapi": {
-      "dependsOn": ["@health/api#build"],
+      "dependsOn": ["@skeleton/api#build"],
       "outputs": ["packages/api-spec/openapi.yaml"]
     },
     "codegen:swift": {

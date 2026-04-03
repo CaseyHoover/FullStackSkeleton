@@ -1,6 +1,6 @@
 import "server-only";
 
-import { auth } from "@health/auth";
+import { auth } from "@skeleton/auth";
 import { headers } from "next/headers";
 
 export async function getSession() {

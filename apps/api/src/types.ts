@@ -1,4 +1,4 @@
-import type { auth } from "@health/auth";
+import type { auth } from "@skeleton/auth";
 
 type Session = Awaited<ReturnType<typeof auth.api.getSession>>;
 

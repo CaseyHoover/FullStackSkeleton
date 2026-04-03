@@ -1,5 +1,5 @@
-import { createApiClient } from "@health/api-client";
-import type { paths } from "@health/api-client";
+import { createApiClient } from "@skeleton/api-client";
+import type { paths } from "@skeleton/api-client";
 import useSWR, { useSWRConfig } from "swr";
 
 const client = createApiClient();

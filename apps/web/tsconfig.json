@@ -8,13 +8,13 @@
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./src/*"],
-      "@health/api-client": ["../../packages/api-client/src/index.ts"],
-      "@health/shared": ["../../packages/shared/src/index.ts"],
-      "@health/shared/*": ["../../packages/shared/src/*"],
-      "@health/auth": ["../../packages/auth/src/index.ts"],
-      "@health/auth/client": ["../../packages/auth/src/client.ts"],
-      "@health/auth/next": ["../../packages/auth/src/next.ts"],
-      "@health/auth/*": ["../../packages/auth/src/*"]
+      "@skeleton/api-client": ["../../packages/api-client/src/index.ts"],
+      "@skeleton/shared": ["../../packages/shared/src/index.ts"],
+      "@skeleton/shared/*": ["../../packages/shared/src/*"],
+      "@skeleton/auth": ["../../packages/auth/src/index.ts"],
+      "@skeleton/auth/client": ["../../packages/auth/src/client.ts"],
+      "@skeleton/auth/next": ["../../packages/auth/src/next.ts"],
+      "@skeleton/auth/*": ["../../packages/auth/src/*"]
     }
   },
   "include": [

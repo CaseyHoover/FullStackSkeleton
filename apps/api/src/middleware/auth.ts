@@ -1,6 +1,6 @@
 import type { Context, Next } from "hono";
 
-import { auth } from "@health/auth";
+import { auth } from "@skeleton/auth";
 
 export async function authMiddleware(c: Context, next: Next) {
   const session = await auth.api.getSession({ headers: c.req.raw.headers });

@@ -6,9 +6,9 @@
     "noEmit": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@health/shared": ["../../packages/shared/src/index.ts"],
-      "@health/auth": ["../../packages/auth/src/index.ts"],
-      "@health/db": ["../../packages/db/src/index.ts"]
+      "@skeleton/shared": ["../../packages/shared/src/index.ts"],
+      "@skeleton/auth": ["../../packages/auth/src/index.ts"],
+      "@skeleton/db": ["../../packages/db/src/index.ts"]
     }
   },
   "include": ["src/**/*.ts"],

@@ -1,1 +1,1 @@
-export { authClient } from "@health/auth/client";
+export { authClient } from "@skeleton/auth/client";

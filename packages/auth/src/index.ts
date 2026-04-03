@@ -2,7 +2,7 @@ import { betterAuth } from "better-auth";
 import { admin } from "better-auth/plugins/admin";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 
-import { prisma } from "@health/db";
+import { prisma } from "@skeleton/db";
 
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,

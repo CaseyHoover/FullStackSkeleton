@@ -5,7 +5,7 @@
     "rootDir": "../..",
     "noEmit": true,
     "paths": {
-      "@health/db": ["../db/src/index.ts"]
+      "@skeleton/db": ["../db/src/index.ts"]
     }
   },
   "include": ["src/**/*.ts"]

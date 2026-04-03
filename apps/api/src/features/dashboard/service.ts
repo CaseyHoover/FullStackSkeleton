@@ -1,4 +1,4 @@
-import type { CreateDocument } from "@health/shared";
+import type { CreateDocument } from "@skeleton/shared";
 
 import * as repo from "./repository.js";
 

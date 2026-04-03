@@ -1,1 +1,1 @@
-export { GET, POST } from "@health/auth/next";
+export { GET, POST } from "@skeleton/auth/next";

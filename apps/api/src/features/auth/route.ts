@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 
-import { auth } from "@health/auth";
+import { auth } from "@skeleton/auth";
 
 export const authRoutes = new Hono();
 

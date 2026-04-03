@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@health/api-client", "@health/shared", "@health/auth"],
+  transpilePackages: ["@skeleton/api-client", "@skeleton/shared", "@skeleton/auth"],
 };
 
 export default nextConfig;

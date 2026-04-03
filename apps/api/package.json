@@ -1,5 +1,5 @@
 {
-  "name": "@health/api",
+  "name": "@skeleton/api",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -10,10 +10,10 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
-    "@health/auth": "workspace:*",
-    "@health/db": "workspace:*",
+    "@skeleton/auth": "workspace:*",
+    "@skeleton/db": "workspace:*",
     "@prisma/client": "^6.6.0",
-    "@health/shared": "workspace:*",
+    "@skeleton/shared": "workspace:*",
     "@hono/node-server": "^1.14.0",
     "@hono/swagger-ui": "^0.6.1",
     "@hono/zod-openapi": "^1.2.4",
