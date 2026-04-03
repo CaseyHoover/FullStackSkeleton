@@ -46,6 +46,13 @@ const eslintConfig = defineConfig([
   importX.flatConfigs.recommended,
   importX.flatConfigs.typescript,
   {
+    settings: {
+      "import-x/resolver": {
+        typescript: {
+          project: "./tsconfig.json",
+        },
+      },
+    },
     rules: {
       "import-x/order": [
         "warn",
