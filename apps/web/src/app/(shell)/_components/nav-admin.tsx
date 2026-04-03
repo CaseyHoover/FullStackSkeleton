@@ -1,6 +1,6 @@
 "use client";
 
-import { IconApi } from "@tabler/icons-react";
+import { IconApi, IconDatabase } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -14,6 +14,7 @@ import {
 
 const items = [
   { name: "API Docs", url: "/api-docs", icon: IconApi },
+  { name: "DB Studio", url: "/db-studio", icon: IconDatabase },
 ];
 
 export function NavAdmin() {
