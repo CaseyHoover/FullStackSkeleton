@@ -17,7 +17,7 @@ export default function SignInPage() {
     <div className="flex min-h-svh items-center justify-center">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">Welcome to HealthDash</CardTitle>
+          <CardTitle className="text-2xl">Welcome to FullStackSkeleton</CardTitle>
           <CardDescription>Sign in to access your dashboard</CardDescription>
         </CardHeader>
         <CardContent>

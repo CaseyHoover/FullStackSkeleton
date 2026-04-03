@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct HealthDashApp: App {
+struct FullStackSkeletonApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -11,7 +11,7 @@ struct HealthDashApp: App {
 
 struct ContentView: View {
     var body: some View {
-        Text("HealthDash")
+        Text("FullStackSkeleton")
             .font(.largeTitle)
     }
 }

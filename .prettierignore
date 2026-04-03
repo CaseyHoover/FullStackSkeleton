@@ -2,5 +2,5 @@
 node_modules
 dist
 pnpm-lock.yaml
-apps/ios/HealthDash/Generated
+apps/ios/FullStackSkeleton/Generated
 packages/api-spec/openapi.yaml

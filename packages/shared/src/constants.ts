@@ -1,1 +1,1 @@
-export const APP_NAME = "HealthDash";
+export const APP_NAME = "FullStackSkeleton";

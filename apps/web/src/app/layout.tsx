@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000",
   ),
   title: {
-    template: "%s | HealthDash",
-    default: "HealthDash",
+    template: "%s | FullStackSkeleton",
+    default: "FullStackSkeleton",
   },
-  description: "Your personal health dashboard",
+  description: "A full-stack application skeleton",
   openGraph: {
-    title: "HealthDash",
-    description: "Your personal health dashboard",
+    title: "FullStackSkeleton",
+    description: "A full-stack application skeleton",
     type: "website",
   },
 };

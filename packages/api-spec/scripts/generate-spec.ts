@@ -9,7 +9,7 @@ import { app } from "../../../apps/api/src/app.js";
 
 const spec = app.getOpenAPI31Document({
   openapi: "3.1.0",
-  info: { title: "HealthDash API", version: "0.1.0" },
+  info: { title: "FullStackSkeleton API", version: "0.1.0" },
 });
 
 const outPath = path.resolve(

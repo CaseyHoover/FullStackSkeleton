@@ -29,7 +29,7 @@ app.route("/dashboard", dashboardRoutes);
 // OpenAPI doc + Swagger UI
 app.doc("/openapi.json", {
   openapi: "3.1.0",
-  info: { title: "HealthDash API", version: "0.1.0" },
+  info: { title: "FullStackSkeleton API", version: "0.1.0" },
 });
 
 // Light theme — match app's teal primary

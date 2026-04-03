@@ -1,6 +1,6 @@
 generatorName: swift6
 inputSpec: ../../packages/api-spec/openapi.yaml
-outputDir: ./HealthDash/Generated
+outputDir: ./FullStackSkeleton/Generated
 additionalProperties:
-  projectName: HealthDashAPI
+  projectName: FullStackSkeletonAPI
   library: urlsession

@@ -27,7 +27,7 @@
     },
     "codegen:swift": {
       "dependsOn": ["codegen:openapi"],
-      "outputs": ["apps/ios/HealthDash/Generated/**"]
+      "outputs": ["apps/ios/FullStackSkeleton/Generated/**"]
     }
   }
 }
