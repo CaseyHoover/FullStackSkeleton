@@ -36,12 +36,12 @@ export function NavDocuments() {
   const pathname = usePathname();
 
   return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+    <SidebarGroup>
       <SidebarGroupLabel>Documents</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton isActive={pathname === item.url} render={<Link href={item.url} />}>
+            <SidebarMenuButton tooltip={item.name} isActive={pathname === item.url} render={<Link href={item.url} />}>
               <item.icon />
               <span>{item.name}</span>
             </SidebarMenuButton>

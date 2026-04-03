@@ -21,12 +21,13 @@ export function NavAdmin() {
   const pathname = usePathname();
 
   return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+    <SidebarGroup>
       <SidebarGroupLabel>Admin</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton
+              tooltip={item.name}
               isActive={pathname === item.url}
               render={<Link href={item.url} />}
             >
