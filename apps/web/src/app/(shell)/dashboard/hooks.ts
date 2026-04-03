@@ -4,12 +4,18 @@ import useSWR, { useSWRConfig } from "swr";
 
 const client = createApiClient();
 
+const opts = {
+  revalidateOnFocus: false,
+  revalidateOnReconnect: false,
+  dedupingInterval: 60_000,
+} as const;
+
 export function useVisitorData() {
   return useSWR("/dashboard/visitors", async () => {
     const { data, error } = await client.GET("/dashboard/visitors");
     if (error) throw error;
     return data;
-  });
+  }, opts);
 }
 
 export function useSummaryCards() {
@@ -17,7 +23,7 @@ export function useSummaryCards() {
     const { data, error } = await client.GET("/dashboard/summary");
     if (error) throw error;
     return data;
-  });
+  }, opts);
 }
 
 export function useDocuments() {
@@ -25,7 +31,7 @@ export function useDocuments() {
     const { data, error } = await client.GET("/dashboard/documents");
     if (error) throw error;
     return data;
-  });
+  }, opts);
 }
 
 type CreateDocumentBody = NonNullable<paths["/dashboard/documents"]["post"]["requestBody"]>["content"]["application/json"];
