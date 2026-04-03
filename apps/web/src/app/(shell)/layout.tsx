@@ -1,14 +1,19 @@
+import { cookies } from "next/headers";
+
 import { AppSidebar } from "@/app/(shell)/_components/app-sidebar";
 import { SiteHeader } from "@/app/(shell)/_components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = await cookies();
+  const defaultOpen = cookieStore.get("sidebar_state")?.value !== "false";
+
   return (
-    <SidebarProvider className="[--sidebar-width:--spacing(72)]">
+    <SidebarProvider defaultOpen={defaultOpen} className="[--sidebar-width:--spacing(72)]">
       <AppSidebar variant="inset" />
       <SidebarInset>
         <SiteHeader />
