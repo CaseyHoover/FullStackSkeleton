@@ -24,3 +24,11 @@ export const SummaryCardSchema = z.object({
   footerText: z.string(),
   footerSub: z.string(),
 });
+
+export const DocumentsArraySchema = z.array(DocumentSchema);
+export const VisitorsArraySchema = z.array(VisitorDataPointSchema);
+export const SummaryCardsArraySchema = z.array(SummaryCardSchema);
+
+export type Document = z.infer<typeof DocumentSchema>;
+export type VisitorDataPoint = z.infer<typeof VisitorDataPointSchema>;
+export type SummaryCard = z.infer<typeof SummaryCardSchema>;
