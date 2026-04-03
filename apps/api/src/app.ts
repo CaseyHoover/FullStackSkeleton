@@ -6,7 +6,6 @@ import { logger } from "hono/logger";
 import { authMiddleware } from "./middleware/auth.js";
 import type { AppEnv } from "./types.js";
 import { authRoutes } from "./features/auth/route.js";
-import { billingRoutes } from "./features/billing/route.js";
 import { dashboardRoutes } from "./features/dashboard/route.js";
 
 export const app = new OpenAPIHono<AppEnv>();
@@ -26,9 +25,6 @@ app.route("/api/auth", authRoutes);
 // Protected routes
 app.use("/dashboard/*", authMiddleware);
 app.route("/dashboard", dashboardRoutes);
-
-app.use("/billing/*", authMiddleware);
-app.route("/billing", billingRoutes);
 
 // OpenAPI doc + Swagger UI
 app.doc("/openapi.json", {

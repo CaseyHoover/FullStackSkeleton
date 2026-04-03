@@ -72,6 +72,10 @@ DATABASE_URL=postgresql://healthdash:healthdash@localhost:5432/healthdash
 
 # API (optional, defaults shown)
 NEXT_PUBLIC_API_URL=http://localhost:4000
+
+# Admin (comma-separated user IDs — sign in first, then find your ID
+# at http://localhost:5555 in the User table)
+ADMIN_USER_IDS=<your-user-id>
 ```
 
 For the GitHub OAuth app, set the callback URL to `http://localhost:3000/api/auth/callback/github`.
