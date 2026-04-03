@@ -1,4 +1,5 @@
 import { betterAuth } from "better-auth";
+import { admin } from "better-auth/plugins/admin";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 
 import { prisma } from "@health/db";
@@ -12,4 +13,10 @@ export const auth = betterAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET ?? "",
     },
   },
+  plugins: [
+    admin({
+      defaultRole: "user",
+      adminUserIds: process.env.ADMIN_USER_IDS?.split(",") ?? [],
+    }),
+  ],
 });

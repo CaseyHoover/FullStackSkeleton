@@ -41,7 +41,9 @@ export async function AppSidebar({
       <SidebarContent>
         <NavMain />
         <NavDocuments />
-        <NavAdmin />
+        {session?.user.role === "admin" && (
+          <NavAdmin isImpersonating={Boolean(session.session.impersonatedBy)} />
+        )}
       </SidebarContent>
       {session?.user && (
         <SidebarFooter>
