@@ -2,7 +2,7 @@
   "name": "health-dashboard-monorepo",
   "private": true,
   "scripts": {
-    "dev": "turbo dev",
+    "dev": "docker compose up -d && turbo dev",
     "build": "turbo build",
     "lint": "turbo lint",
     "format": "prettier --write .",

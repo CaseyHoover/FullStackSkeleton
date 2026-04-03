@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HealthDash
+
+A personal health dashboard built as a pnpm monorepo with Turborepo.
+
+## Architecture
+
+```
+                    +-------------+
+                    |   Browser   |
+                    +------+------+
+                           |
+              +------------+------------+
+              |                         |
+       +------+------+          +------+------+
+       |   Next.js   |          |   Hono API  |
+       |  apps/web   |--------->|  apps/api   |
+       |  :3000      |  fetch   |  :4000      |
+       +------+------+          +------+------+
+              |                         |
+              |    +----------+         |
+              +--->| BetterAuth|<-------+
+              |    +----------+         |
+              |         |               |
+              |    +----+----+          |
+              +--->|Postgres |<---------+
+                   | (Docker)|
+                   | :5432   |
+                   +---------+
+```
+
+- **apps/web** -- Next.js frontend. No business-logic API routes. Fetches data from the Hono API via a generated typed client. Auth handled by BetterAuth with GitHub OAuth.
+- **apps/api** -- Hono API server. All backend logic organized as vertical slices (`features/dashboard/`, `features/billing/`). OpenAPI spec auto-generated from route definitions. Protected by session-based auth middleware.
+- **apps/ios** -- SwiftUI project scaffold with OpenAPI Generator config for typed Swift client codegen.
+- **packages/shared** -- Zod schemas (single source of truth for types), constants. Used by both web and API.
+- **packages/auth** -- BetterAuth configuration shared by web and API. Framework-specific wrappers for Next.js (`/next`) and client-side (`/client`).
+- **packages/db** -- Prisma schema and client singleton. Only place Prisma is instantiated.
+- **packages/api-client** -- Generated TypeScript fetch client from the OpenAPI spec. Used by the web app for fully typed API calls.
+- **packages/api-spec** -- Script to generate `openapi.yaml` from the Hono app's route definitions.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- pnpm 10+
+- Docker (for Postgres)
+- A GitHub OAuth app (for authentication)
+
+### 1. Clone and install
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repo-url>
+cd health-dashboard
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Set up environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env.local` file in the project root:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Auth
+BETTER_AUTH_SECRET=<generate with: openssl rand -base64 32>
+BETTER_AUTH_URL=http://localhost:3000
 
-## Learn More
+# GitHub OAuth (create at https://github.com/settings/developers)
+GITHUB_CLIENT_ID=<your-client-id>
+GITHUB_CLIENT_SECRET=<your-client-secret>
 
-To learn more about Next.js, take a look at the following resources:
+# Database
+DATABASE_URL=postgresql://healthdash:healthdash@localhost:5432/healthdash
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# API (optional, defaults shown)
+NEXT_PUBLIC_API_URL=http://localhost:4000
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+For the GitHub OAuth app, set the callback URL to `http://localhost:3000/api/auth/callback/github`.
 
-## Deploy on Vercel
+### 3. Push the database schema
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+docker compose up -d
+pnpm --filter @health/db db:generate
+pnpm --filter @health/db db:push
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 4. Run the dev servers
+
+```bash
+pnpm dev
+```
+
+This starts:
+- **Web** at http://localhost:3000
+- **API** at http://localhost:4000
+- **Prisma Studio** at http://localhost:5555
+
+### Admin tools (available in the sidebar when signed in)
+
+- **API Docs** (`/api-docs`) -- Swagger UI for the Hono API
+- **DB Studio** (`/db-studio`) -- Prisma Studio for database inspection
+
+## Scripts
+
+| Command | Description |
+|---|---|
+| `pnpm dev` | Start all services (Postgres + web + API + Prisma Studio) |
+| `pnpm build` | Build all packages and apps |
+| `pnpm lint` | Lint all packages |
+| `pnpm --filter @health/db db:push` | Push Prisma schema to database |
+| `pnpm --filter @health/db studio` | Open Prisma Studio standalone |
+| `pnpm codegen:openapi` | Generate OpenAPI spec from Hono routes |
+| `pnpm codegen:swift` | Generate Swift types from OpenAPI spec |
+| `pnpm docker:up` | Start Postgres container |
+| `pnpm docker:down` | Stop Postgres container |
