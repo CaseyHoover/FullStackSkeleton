@@ -1,0 +1,21 @@
+[
+  { "date": "2024-04-01", "desktop": 222, "mobile": 150 },
+  { "date": "2024-04-02", "desktop": 97, "mobile": 180 },
+  { "date": "2024-04-03", "desktop": 167, "mobile": 120 },
+  { "date": "2024-04-04", "desktop": 242, "mobile": 260 },
+  { "date": "2024-04-05", "desktop": 373, "mobile": 290 },
+  { "date": "2024-04-06", "desktop": 301, "mobile": 340 },
+  { "date": "2024-04-07", "desktop": 245, "mobile": 180 },
+  { "date": "2024-06-12", "desktop": 492, "mobile": 420 },
+  { "date": "2024-06-13", "desktop": 81, "mobile": 130 },
+  { "date": "2024-06-14", "desktop": 426, "mobile": 380 },
+  { "date": "2024-06-15", "desktop": 307, "mobile": 350 },
+  { "date": "2024-06-16", "desktop": 371, "mobile": 310 },
+  { "date": "2024-06-24", "desktop": 132, "mobile": 180 },
+  { "date": "2024-06-25", "desktop": 141, "mobile": 190 },
+  { "date": "2024-06-26", "desktop": 434, "mobile": 380 },
+  { "date": "2024-06-27", "desktop": 448, "mobile": 490 },
+  { "date": "2024-06-28", "desktop": 149, "mobile": 200 },
+  { "date": "2024-06-29", "desktop": 103, "mobile": 160 },
+  { "date": "2024-06-30", "desktop": 446, "mobile": 400 }
+]

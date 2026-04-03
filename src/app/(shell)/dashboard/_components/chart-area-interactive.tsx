@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
+import { useVisitorData } from "@/app/(shell)/dashboard/hooks";
 import {
   Card,
   CardAction,
@@ -24,14 +25,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useIsMobile } from "@/hooks/use-mobile";
-
-export interface ChartDataPoint {
-  date: string;
-  desktop: number;
-  mobile: number;
-}
 
 const chartConfig = {
   visitors: {
@@ -47,11 +43,8 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function ChartAreaInteractive({
-  data: chartData,
-}: {
-  data: ChartDataPoint[];
-}) {
+export function ChartAreaInteractive() {
+  const { data: chartData, isLoading } = useVisitorData();
   const isMobile = useIsMobile();
   const [timeRange, setTimeRange] = React.useState("90d");
 
@@ -62,6 +55,7 @@ export function ChartAreaInteractive({
   }, [isMobile]);
 
   const filteredData = React.useMemo(() => {
+    if (!chartData?.length) return [];
     const daysMap: Record<string, number> = { "90d": 90, "30d": 30, "7d": 7 };
     const daysToSubtract = daysMap[timeRange] ?? 90;
     const referenceDate = new Date(chartData[chartData.length - 1].date);
@@ -69,6 +63,23 @@ export function ChartAreaInteractive({
     startDate.setDate(startDate.getDate() - daysToSubtract);
     return chartData.filter((item) => new Date(item.date) >= startDate);
   }, [chartData, timeRange]);
+
+  if (isLoading || !chartData) {
+    return (
+      <Card className="@container/card">
+        <CardHeader>
+          <Skeleton className="h-5 w-32" />
+          <Skeleton className="h-4 w-48" />
+        </CardHeader>
+        <CardContent className="
+          px-2 pt-4
+          sm:px-6 sm:pt-6
+        ">
+          <Skeleton className="h-62.5 w-full" />
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="@container/card">

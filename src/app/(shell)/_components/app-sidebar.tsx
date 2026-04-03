@@ -2,10 +2,10 @@ import { IconInnerShadowTop } from "@tabler/icons-react";
 import Link from "next/link";
 import * as React from "react";
 
-import { NavDocuments } from "@/components/nav-documents";
-import { NavMain } from "@/components/nav-main";
-import { NavSecondary } from "@/components/nav-secondary";
-import { NavUser } from "@/components/nav-user";
+import { NavDocuments } from "@/app/(shell)/_components/nav-documents";
+import { NavMain } from "@/app/(shell)/_components/nav-main";
+import { NavUser } from "@/app/(shell)/_components/nav-user";
+import { getSession } from "@/auth/session";
 import {
   Sidebar,
   SidebarContent,
@@ -16,7 +16,6 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { getSession } from "@/lib/session";
 
 export async function AppSidebar({
   ...props
@@ -30,7 +29,7 @@ export async function AppSidebar({
           <SidebarMenuItem>
             <SidebarMenuButton
               className="data-[slot=sidebar-menu-button]:p-1.5!"
-              render={<Link href="#" />}
+              render={<Link href="/" />}
             >
               <IconInnerShadowTop className="size-5!" />
               <span className="text-base font-semibold">Acme Inc.</span>
@@ -41,7 +40,6 @@ export async function AppSidebar({
       <SidebarContent>
         <NavMain />
         <NavDocuments />
-        <NavSecondary className="mt-auto" />
       </SidebarContent>
       {session?.user && (
         <SidebarFooter>

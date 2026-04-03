@@ -53,6 +53,7 @@ import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import { useDocuments } from "@/app/(shell)/dashboard/hooks";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -90,6 +91,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -350,12 +352,15 @@ function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
   );
 }
 
-export function DataTable({
-  data: initialData,
-}: {
-  data: z.infer<typeof schema>[];
-}) {
-  const [data, setData] = React.useState(() => initialData);
+export function DataTable() {
+  const { data: fetchedData, isLoading } = useDocuments();
+  const [data, setData] = React.useState<z.infer<typeof schema>[]>([]);
+
+  React.useEffect(() => {
+    if (fetchedData) {
+      setData(fetchedData);
+    }
+  }, [fetchedData]);
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -404,6 +409,34 @@ export function DataTable({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
+
+  if (isLoading) {
+    return (
+      <div className="
+        flex flex-col gap-4 px-4 py-6
+        lg:px-6
+      ">
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-8 w-40" />
+          <Skeleton className="h-8 w-24" />
+        </div>
+        <div className="rounded-lg border">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="
+              flex items-center gap-4 border-b px-4 py-3
+              last:border-b-0
+            ">
+              <Skeleton className="size-4" />
+              <Skeleton className="h-4 w-48" />
+              <Skeleton className="ml-auto h-4 w-20" />
+              <Skeleton className="h-4 w-16" />
+              <Skeleton className="h-4 w-16" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -727,7 +760,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
           {item.header}
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent overlay={false}>
         <DrawerHeader className="gap-1">
           <DrawerTitle>{item.header}</DrawerTitle>
           <DrawerDescription>
@@ -804,7 +837,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                   <SelectTrigger id="type" className="w-full">
                     <SelectValue placeholder="Select a type" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent >
                     <SelectItem value="Table of Contents">
                       Table of Contents
                     </SelectItem>
@@ -830,7 +863,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                   <SelectTrigger id="status" className="w-full">
                     <SelectValue placeholder="Select a status" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent >
                     <SelectItem value="Done">Done</SelectItem>
                     <SelectItem value="In Progress">In Progress</SelectItem>
                     <SelectItem value="Not Started">Not Started</SelectItem>
@@ -854,7 +887,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                 <SelectTrigger id="reviewer" className="w-full">
                   <SelectValue placeholder="Select a reviewer" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent >
                   <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>
                   <SelectItem value="Jamik Tashpulatov">
                     Jamik Tashpulatov

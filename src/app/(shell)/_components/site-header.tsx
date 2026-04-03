@@ -1,8 +1,22 @@
-import { ModeToggle } from "@/components/mode-toggle";
+"use client";
+
+import { usePathname } from "next/navigation";
+
+import { ModeToggle } from "@/app/(shell)/_components/mode-toggle";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
+function titleFromPathname(pathname: string) {
+  const segment = pathname.split("/").filter(Boolean).pop() ?? "dashboard";
+  return segment
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 export function SiteHeader() {
+  const pathname = usePathname();
+
   return (
     <header className="
       flex h-(--header-height) shrink-0 items-center gap-2 border-b
@@ -21,7 +35,7 @@ export function SiteHeader() {
             data-[orientation=vertical]:h-4
           "
         />
-        <h1 className="text-base font-medium">Documents</h1>
+        <h1 className="text-base font-medium">{titleFromPathname(pathname)}</h1>
         <div className="ml-auto flex items-center gap-2">
           <ModeToggle />
         </div>
