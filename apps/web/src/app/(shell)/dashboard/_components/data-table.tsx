@@ -19,6 +19,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import type { paths } from "@health/api-client";
 import {
   IconChevronDown,
   IconChevronLeft,
@@ -51,7 +52,6 @@ import {
 import * as React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import { toast } from "sonner";
-import { z } from "zod";
 
 import { useDocuments } from "@/app/(shell)/dashboard/hooks";
 import { Badge } from "@/components/ui/badge";
@@ -103,15 +103,8 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-export const schema = z.object({
-  id: z.number(),
-  header: z.string(),
-  type: z.string(),
-  status: z.string(),
-  target: z.string(),
-  limit: z.string(),
-  reviewer: z.string(),
-});
+type Document =
+  paths["/dashboard/documents"]["get"]["responses"]["200"]["content"]["application/json"][number];
 
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {
@@ -140,7 +133,7 @@ function EditableCell({
   row,
   field,
 }: {
-  row: z.infer<typeof schema>;
+  row: Document;
   field: "target" | "limit";
 }) {
   return (
@@ -173,7 +166,7 @@ function EditableCell({
   );
 }
 
-const columns: ColumnDef<z.infer<typeof schema>>[] = [
+const columns: ColumnDef<Document>[] = [
   {
     id: "drag",
     header: () => null,
@@ -186,7 +179,9 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
         <Checkbox
           checked={table.getIsAllPageRowsSelected()}
           indeterminate={table.getIsSomePageRowsSelected()}
-          onCheckedChange={(value) => { table.toggleAllPageRowsSelected(value); }}
+          onCheckedChange={(value) => {
+            table.toggleAllPageRowsSelected(value);
+          }}
           aria-label="Select all"
         />
       </div>
@@ -195,7 +190,9 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
       <div className="flex items-center justify-center">
         <Checkbox
           checked={row.getIsSelected()}
-          onCheckedChange={(value) => { row.toggleSelected(value); }}
+          onCheckedChange={(value) => {
+            row.toggleSelected(value);
+          }}
           aria-label="Select row"
         />
       </div>
@@ -242,16 +239,12 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   {
     accessorKey: "target",
     header: () => <div className="w-full text-right">Target</div>,
-    cell: ({ row }) => (
-      <EditableCell row={row.original} field="target" />
-    ),
+    cell: ({ row }) => <EditableCell row={row.original} field="target" />,
   },
   {
     accessorKey: "limit",
     header: () => <div className="w-full text-right">Limit</div>,
-    cell: ({ row }) => (
-      <EditableCell row={row.original} field="limit" />
-    ),
+    cell: ({ row }) => <EditableCell row={row.original} field="limit" />,
   },
   {
     accessorKey: "reviewer",
@@ -265,9 +258,10 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
 
       return (
         <>
-          <Label htmlFor={`${String(row.original.id)}-reviewer`} className="
-            sr-only
-          ">
+          <Label
+            htmlFor={`${String(row.original.id)}-reviewer`}
+            className="sr-only"
+          >
             Reviewer
           </Label>
           <Select>
@@ -324,7 +318,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   },
 ];
 
-function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
+function DraggableRow({ row }: { row: Row<Document> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
     id: row.original.id,
   });
@@ -354,7 +348,7 @@ function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
 
 export function DataTable() {
   const { data: fetchedData, isLoading } = useDocuments();
-  const [data, setData] = React.useState<z.infer<typeof schema>[]>([]);
+  const [data, setData] = React.useState<Document[]>([]);
 
   React.useEffect(() => {
     if (fetchedData) {
@@ -422,10 +416,13 @@ export function DataTable() {
         </div>
         <div className="rounded-lg border">
           {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="
-              flex items-center gap-4 border-b px-4 py-3
-              last:border-b-0
-            ">
+            <div
+              key={i}
+              className="
+                flex items-center gap-4 border-b px-4 py-3
+                last:border-b-0
+              "
+            >
               <Skeleton className="size-4" />
               <Skeleton className="h-4 w-48" />
               <Skeleton className="ml-auto h-4 w-20" />
@@ -521,9 +518,9 @@ export function DataTable() {
                       key={column.id}
                       className="capitalize"
                       checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        { column.toggleVisibility(value); }
-                      }
+                      onCheckedChange={(value) => {
+                        column.toggleVisibility(value);
+                      }}
                     >
                       {column.id}
                     </DropdownMenuCheckboxItem>
@@ -653,7 +650,9 @@ export function DataTable() {
                   hidden size-8 p-0
                   lg:flex
                 "
-                onClick={() => { table.setPageIndex(0); }}
+                onClick={() => {
+                  table.setPageIndex(0);
+                }}
                 disabled={!table.getCanPreviousPage()}
               >
                 <span className="sr-only">Go to first page</span>
@@ -663,7 +662,9 @@ export function DataTable() {
                 variant="outline"
                 className="size-8"
                 size="icon"
-                onClick={() => { table.previousPage(); }}
+                onClick={() => {
+                  table.previousPage();
+                }}
                 disabled={!table.getCanPreviousPage()}
               >
                 <span className="sr-only">Go to previous page</span>
@@ -673,7 +674,9 @@ export function DataTable() {
                 variant="outline"
                 className="size-8"
                 size="icon"
-                onClick={() => { table.nextPage(); }}
+                onClick={() => {
+                  table.nextPage();
+                }}
                 disabled={!table.getCanNextPage()}
               >
                 <span className="sr-only">Go to next page</span>
@@ -686,7 +689,9 @@ export function DataTable() {
                   lg:flex
                 "
                 size="icon"
-                onClick={() => { table.setPageIndex(table.getPageCount() - 1); }}
+                onClick={() => {
+                  table.setPageIndex(table.getPageCount() - 1);
+                }}
                 disabled={!table.getCanNextPage()}
               >
                 <span className="sr-only">Go to last page</span>
@@ -750,7 +755,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
+function TableCellViewer({ item }: { item: Document }) {
   const isMobile = useIsMobile();
 
   return (
@@ -837,7 +842,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                   <SelectTrigger id="type" className="w-full">
                     <SelectValue placeholder="Select a type" />
                   </SelectTrigger>
-                  <SelectContent >
+                  <SelectContent>
                     <SelectItem value="Table of Contents">
                       Table of Contents
                     </SelectItem>
@@ -863,7 +868,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                   <SelectTrigger id="status" className="w-full">
                     <SelectValue placeholder="Select a status" />
                   </SelectTrigger>
-                  <SelectContent >
+                  <SelectContent>
                     <SelectItem value="Done">Done</SelectItem>
                     <SelectItem value="In Progress">In Progress</SelectItem>
                     <SelectItem value="Not Started">Not Started</SelectItem>
@@ -887,7 +892,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                 <SelectTrigger id="reviewer" className="w-full">
                   <SelectValue placeholder="Select a reviewer" />
                 </SelectTrigger>
-                <SelectContent >
+                <SelectContent>
                   <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>
                   <SelectItem value="Jamik Tashpulatov">
                     Jamik Tashpulatov

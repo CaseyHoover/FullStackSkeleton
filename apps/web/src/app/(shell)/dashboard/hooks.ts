@@ -1,23 +1,28 @@
+import { createApiClient } from "@health/api-client";
 import useSWR from "swr";
 
-import type { Document, SummaryCard, VisitorDataPoint } from "@health/shared";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
-
-async function fetcher<T>(url: string): Promise<T> {
-  const res = await fetch(url, { credentials: "include" });
-  if (!res.ok) throw new Error(`${res.status}`);
-  return res.json() as Promise<T>;
-}
+const client = createApiClient();
 
 export function useVisitorData() {
-  return useSWR<VisitorDataPoint[]>(`${API_URL}/dashboard/visitors`, fetcher);
+  return useSWR("/dashboard/visitors", async () => {
+    const { data, error } = await client.GET("/dashboard/visitors");
+    if (error) throw error;
+    return data;
+  });
 }
 
 export function useSummaryCards() {
-  return useSWR<SummaryCard[]>(`${API_URL}/dashboard/summary`, fetcher);
+  return useSWR("/dashboard/summary", async () => {
+    const { data, error } = await client.GET("/dashboard/summary");
+    if (error) throw error;
+    return data;
+  });
 }
 
 export function useDocuments() {
-  return useSWR<Document[]>(`${API_URL}/dashboard/documents`, fetcher);
+  return useSWR("/dashboard/documents", async () => {
+    const { data, error } = await client.GET("/dashboard/documents");
+    if (error) throw error;
+    return data;
+  });
 }

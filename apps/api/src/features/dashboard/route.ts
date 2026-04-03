@@ -1,11 +1,12 @@
 import { createRoute, OpenAPIHono } from "@hono/zod-openapi";
 
-import * as service from "./service.js";
 import {
-  DocumentsResponseSchema,
-  SummaryResponseSchema,
-  VisitorsResponseSchema,
-} from "./types.js";
+  DocumentsArraySchema,
+  SummaryCardsArraySchema,
+  VisitorsArraySchema,
+} from "@health/shared";
+
+import * as service from "./service.js";
 
 export const dashboardRoutes = new OpenAPIHono();
 
@@ -14,7 +15,7 @@ const visitorsRoute = createRoute({
   path: "/visitors",
   responses: {
     200: {
-      content: { "application/json": { schema: VisitorsResponseSchema } },
+      content: { "application/json": { schema: VisitorsArraySchema } },
       description: "Visitor data",
     },
   },
@@ -25,7 +26,7 @@ const summaryRoute = createRoute({
   path: "/summary",
   responses: {
     200: {
-      content: { "application/json": { schema: SummaryResponseSchema } },
+      content: { "application/json": { schema: SummaryCardsArraySchema } },
       description: "Summary cards",
     },
   },
@@ -36,7 +37,7 @@ const documentsRoute = createRoute({
   path: "/documents",
   responses: {
     200: {
-      content: { "application/json": { schema: DocumentsResponseSchema } },
+      content: { "application/json": { schema: DocumentsArraySchema } },
       description: "Documents list",
     },
   },
