@@ -39,14 +39,43 @@ A full-stack application skeleton built as a pnpm monorepo with Turborepo.
 
 ## Getting Started
 
-### Prerequisites
+### Option A: Dev Container (recommended)
 
-- Node.js 20+
+The fastest way to get running. Requires [VS Code](https://code.visualstudio.com/) with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) (or any DevContainer-compatible editor) and Docker.
+
+1. Clone the repo and open it in VS Code
+2. When prompted, click **Reopen in Container** (or run `Dev Containers: Reopen in Container` from the command palette)
+3. Create a `.env.local` file in the project root:
+
+```bash
+# Auth
+BETTER_AUTH_SECRET=<generate with: openssl rand -base64 32>
+BETTER_AUTH_URL=http://localhost:3000
+
+# GitHub OAuth (create at https://github.com/settings/developers)
+GITHUB_CLIENT_ID=<your-client-id>
+GITHUB_CLIENT_SECRET=<your-client-secret>
+
+# API (optional, defaults shown)
+NEXT_PUBLIC_API_URL=http://localhost:4000
+```
+
+> `DATABASE_URL` is provided automatically by the dev container -- no need to set it.
+
+4. Run `pnpm dev` and you're up
+
+For the GitHub OAuth app, set the callback URL to `http://localhost:3000/api/auth/callback/github`.
+
+### Option B: Local setup
+
+#### Prerequisites
+
+- Node.js 24+
 - pnpm 10+
 - Docker (for Postgres)
 - A GitHub OAuth app (for authentication)
 
-### 1. Clone and install
+#### 1. Clone and install
 
 ```bash
 git clone <repo-url>
@@ -54,7 +83,7 @@ cd fullstack-skeleton
 pnpm install
 ```
 
-### 2. Set up environment variables
+#### 2. Set up environment variables
 
 Create a `.env.local` file in the project root:
 
@@ -76,7 +105,7 @@ NEXT_PUBLIC_API_URL=http://localhost:4000
 
 For the GitHub OAuth app, set the callback URL to `http://localhost:3000/api/auth/callback/github`.
 
-### 3. Push the database schema
+#### 3. Push the database schema
 
 ```bash
 docker compose up -d
@@ -84,7 +113,7 @@ pnpm --filter @skeleton/db db:generate
 pnpm --filter @skeleton/db db:push
 ```
 
-### 4. Run the dev servers
+#### 4. Run the dev servers
 
 ```bash
 pnpm dev
@@ -96,7 +125,7 @@ This starts:
 - **API** at http://localhost:4000
 - **Prisma Studio** at http://localhost:5555
 
-### 5. Promote yourself to admin
+### Promote yourself to admin
 
 After your first sign-in, promote your user to admin:
 
@@ -110,6 +139,7 @@ docker exec $(docker ps -q --filter ancestor=postgres:17-alpine) \
 
 - **API Docs** (`/api-docs`) -- Swagger UI for the Hono API
 - **DB Studio** (`/db-studio`) -- Prisma Studio for database inspection
+- **Impersonate** (`/impersonate`) -- View the app as another user. Select any user from the list or create a test user on the fly. Your admin session is preserved (tracked via the `impersonatedBy` field on the session), and an amber banner appears in the header with a "Stop Impersonating" button to end the session. Nested impersonation is not allowed.
 
 ## Scripts
 
