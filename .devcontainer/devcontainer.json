@@ -18,7 +18,8 @@
         "esbenp.prettier-vscode",
         "GitHub.vscode-pull-request-github",
         "Prisma.prisma",
-        "bradlc.vscode-tailwindcss"
+        "bradlc.vscode-tailwindcss",
+        "github.vscode-github-actions"
       ]
     }
   }
