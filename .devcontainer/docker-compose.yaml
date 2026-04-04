@@ -6,6 +6,7 @@ services:
     volumes:
       - ..:/workspace:cached
       - ~/.claude:/root/.claude:cached
+      - ~/.config/gh:/root/.config/gh:cached
     command: sleep infinity
     environment:
       DATABASE_URL: postgresql://skeleton:skeleton@db:5432/skeleton
