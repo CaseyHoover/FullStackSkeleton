@@ -3,8 +3,9 @@
   "dockerComposeFile": "docker-compose.yaml",
   "service": "app",
   "workspaceFolder": "/workspace",
+  "remoteUser": "root",
   "forwardPorts": [3000, 4000, 5555],
-  "postCreateCommand": "pnpm install && pnpm db:generate",
+  "postCreateCommand": "cp /tmp/.host-gitconfig /root/.gitconfig 2>/dev/null; git config --global --add safe.directory /workspace && gh auth setup-git 2>/dev/null; pnpm install && pnpm db:generate",
   "customizations": {
     "vscode": {
       "settings": {
