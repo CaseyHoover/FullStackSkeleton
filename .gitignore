@@ -18,6 +18,9 @@ dist
 # claude code
 .claude/settings.local.json
 
+# test coverage
+coverage
+
 # misc
 .DS_Store
 *.pem

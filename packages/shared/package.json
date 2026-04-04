@@ -10,7 +10,8 @@
     "./*": "./src/*"
   },
   "scripts": {
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "jest --coverage"
   },
   "dependencies": {
     "zod": "^4.3.6"
