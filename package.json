@@ -11,14 +11,18 @@
     "codegen:swift": "turbo codegen:swift",
     "db:generate": "turbo db:generate",
     "db:push": "turbo db:push",
+    "test": "turbo test",
     "db:studio": "pnpm --filter @skeleton/db studio",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.19.39",
+    "jest": "^30.3.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
+    "ts-jest": "^29.4.9",
     "turbo": "^2.9.3",
     "typescript": "^5.9.3"
   },
