@@ -18,8 +18,6 @@ RUN apt-get update \
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-RUN git config --global --add safe.directory /workspace
-
 COPY .devcontainer/.zshrc /root/.zshrc
 
 RUN corepack enable && corepack prepare pnpm@10.8.1 --activate
