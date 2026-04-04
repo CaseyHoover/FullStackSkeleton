@@ -12,6 +12,9 @@ out/
 build
 dist
 
+# pnpm store (devcontainer mount)
+.pnpm-store/
+
 # misc
 .DS_Store
 *.pem

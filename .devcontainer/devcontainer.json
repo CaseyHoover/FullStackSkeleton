@@ -1,0 +1,24 @@
+{
+  "name": "FullStackSkeleton",
+  "dockerComposeFile": "docker-compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [3000, 4000, 5555],
+  "postCreateCommand": "pnpm install && pnpm db:generate",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      },
+      "extensions": [
+        "Anthropic.claude-code",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "GitHub.vscode-pull-request-github",
+        "Prisma.prisma",
+        "bradlc.vscode-tailwindcss"
+      ]
+    }
+  }
+}

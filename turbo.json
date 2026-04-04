@@ -6,7 +6,8 @@
       "cache": false,
       "persistent": true,
       "interruptible": true,
-      "dependsOn": ["^db:generate"]
+      "dependsOn": ["^db:generate"],
+      "env": ["DATABASE_URL"]
     },
     "build": {
       "dependsOn": ["^build", "^db:generate"],
@@ -19,7 +20,8 @@
       "cache": false
     },
     "db:push": {
-      "cache": false
+      "cache": false,
+      "env": ["DATABASE_URL"]
     },
     "codegen:openapi": {
       "dependsOn": ["@skeleton/api#build"],
