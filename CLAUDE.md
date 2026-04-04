@@ -1,15 +1,27 @@
 @AGENTS.md
 
-# Tailwind v4 Canonical Classes
+# FullStackSkeleton Monorepo
 
-Always use canonical Tailwind v4 syntax in utility classes (className strings):
-- `calc(var(--spacing)*N)` → `--spacing(N)`
-- `bg-gradient-to-t` → `bg-linear-to-t`
-- `translate-x-[2.5rem]` → `translate-x-10` (use scale values)
-- `start-1/2` → `inset-s-1/2`
-- `border-(--color-border)` → `border-border`
-- `z-[999]` → `z-999`
+pnpm workspaces + Turborepo. Key commands:
 
-**Important:** The `--spacing(N)` shorthand only works inside Tailwind utility classes. In raw CSS declarations (e.g. `:root { --header-height: ... }`), you must use `calc(var(--spacing) * N)` — the shorthand will error with "function requires that the `--spacing` theme variable exists".
+- `pnpm dev` — start all services (Postgres, API, web, Prisma Studio)
+- `pnpm build` — build all packages
+- `pnpm lint` — lint all packages
+- `pnpm test` — run tests with coverage
+- `pnpm codegen:openapi` — generate OpenAPI spec from API routes
+- `pnpm codegen:swift` — generate Swift types for iOS
 
-Run `npx @tailwindcss/upgrade` to auto-fix existing non-canonical classes.
+## Structure
+
+| Path | Role |
+|------|------|
+| `apps/web` | Next.js 16 frontend |
+| `apps/api` | Hono REST API |
+| `apps/ios` | SwiftUI app (consumes generated client) |
+| `packages/shared` | Zod schemas & constants (single source of truth) |
+| `packages/db` | Prisma schema & client |
+| `packages/auth` | BetterAuth config (shared by web + API) |
+| `packages/api-client` | Generated TypeScript fetch client |
+| `packages/api-spec` | OpenAPI spec generation |
+
+Each subfolder has its own CLAUDE.md with package-specific guidance.

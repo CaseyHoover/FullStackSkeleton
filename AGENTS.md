@@ -1,7 +1,6 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# Monorepo Agent Rules
 
-# This is NOT the Next.js you know
-
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-
-<!-- END:nextjs-agent-rules -->
+- Read the relevant subfolder's CLAUDE.md before making changes in that area.
+- Shared types and schemas live in `packages/shared` — don't duplicate them.
+- Database access goes through `packages/db` — never import Prisma directly in apps.
+- Auth config is in `packages/auth` — apps consume it, not define it.
