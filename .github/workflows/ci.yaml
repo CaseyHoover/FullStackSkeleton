@@ -82,3 +82,23 @@ jobs:
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - run: pnpm test
+
+  devcontainer:
+    name: Dev Container Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: devcontainers/ci@v0.3
+        with:
+          runCmd: |
+            zsh -c '
+              source ~/.zshrc
+              echo "Shell: $SHELL"
+              [[ "$ZSH" == *oh-my-zsh* ]] || { echo "FAIL: oh-my-zsh not found"; exit 1; }
+              for plugin in zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete you-should-use; do
+                [[ -d ${ZSH_CUSTOM:-$ZSH/custom}/plugins/$plugin ]] || { echo "FAIL: plugin $plugin not installed"; exit 1; }
+                echo "OK: $plugin"
+              done
+              echo "All zsh plugins verified"
+            '
