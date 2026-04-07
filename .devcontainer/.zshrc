@@ -11,3 +11,6 @@ source $ZSH/oh-my-zsh.sh
 
 [[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
 
+# Warn if .env.local has empty values
+source /workspace/.devcontainer/check-env.sh
+
