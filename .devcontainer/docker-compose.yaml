@@ -8,6 +8,7 @@ services:
       - ~/.claude:/root/.claude:cached
       - ~/.config/gh:/root/.config/gh:cached
       - ~/.gitconfig:/tmp/.host-gitconfig:ro
+      - fullstackskeleton-zsh-history:/root/.zsh_history_data
     command: sleep infinity
     environment:
       DATABASE_URL: postgresql://skeleton:skeleton@db:5432/skeleton
@@ -32,3 +33,4 @@ services:
 
 volumes:
   pgdata:
+  fullstackskeleton-zsh-history:

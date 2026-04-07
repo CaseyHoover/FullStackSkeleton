@@ -1,3 +1,7 @@
+HISTFILE=/root/.zsh_history_data/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_DISABLE_COMPFIX=true
 ZSH_THEME="robbyrussell"

@@ -5,11 +5,12 @@
   "workspaceFolder": "/workspace",
   "remoteUser": "root",
   "forwardPorts": [3000, 4000, 5555],
-  "postCreateCommand": "cp /tmp/.host-gitconfig /root/.gitconfig 2>/dev/null; git config --global --add safe.directory /workspace && gh auth setup-git 2>/dev/null; pnpm install && pnpm db:generate",
+  "onCreateCommand": "cp /tmp/.host-gitconfig /root/.gitconfig 2>/dev/null; git config --global --add safe.directory /workspace && gh auth setup-git 2>/dev/null; pnpm install && pnpm db:generate",
   "customizations": {
     "vscode": {
       "settings": {
-        "terminal.integrated.defaultProfile.linux": "zsh"
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "chat.disableAIFeatures": true
       },
       "extensions": [
         "Anthropic.claude-code",
@@ -19,7 +20,9 @@
         "GitHub.vscode-pull-request-github",
         "Prisma.prisma",
         "bradlc.vscode-tailwindcss",
-        "github.vscode-github-actions"
+        "github.vscode-github-actions",
+        "mutantdino.resourcemonitor",
+        "ms-azuretools.vscode-containers"
       ]
     }
   }
