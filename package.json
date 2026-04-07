@@ -2,7 +2,7 @@
   "name": "fullstack-skeleton",
   "private": true,
   "scripts": {
-    "dev": "docker compose up -d 2>/dev/null; turbo dev",
+    "dev": "bash .devcontainer/check-env.sh && turbo dev",
     "build": "turbo build",
     "lint": "turbo lint",
     "format": "prettier --write .",
@@ -14,7 +14,8 @@
     "test": "turbo test",
     "db:studio": "pnpm --filter @skeleton/db studio",
     "docker:up": "docker compose up -d",
-    "docker:down": "docker compose down"
+    "docker:down": "docker compose down",
+    "clean": "find . -name node_modules -o -name .turbo -o -name .next -o -name .pnpm-store | xargs rm -rf"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
