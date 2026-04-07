@@ -18,6 +18,13 @@ RUN apt-get update \
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-/root/.oh-my-zsh/custom}/plugins/zsh-autosuggestions \
+    && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-/root/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting \
+    && git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ${ZSH_CUSTOM:-/root/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting \
+    && git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git ${ZSH_CUSTOM:-/root/.oh-my-zsh/custom}/plugins/zsh-autocomplete \
+    && git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-/root/.oh-my-zsh/custom}/plugins/you-should-use
+
 COPY .devcontainer/.zshrc /root/.zshrc
+COPY .devcontainer/.zsh_aliases /root/.zsh_aliases
 
 RUN corepack enable && corepack prepare pnpm@10.8.1 --activate
