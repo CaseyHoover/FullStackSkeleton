@@ -2,7 +2,7 @@
   "name": "fullstack-skeleton",
   "private": true,
   "scripts": {
-    "dev": "bash .devcontainer/check-env.sh && turbo dev",
+    "dev": "bash .devcontainer/check-env.sh && (spotlight server & turbo dev)",
     "build": "turbo build",
     "lint": "turbo lint",
     "format": "prettier --write .",
@@ -18,6 +18,7 @@
     "clean": "find . -name node_modules -o -name .turbo -o -name .next -o -name .pnpm-store | xargs rm -rf"
   },
   "devDependencies": {
+    "@spotlightjs/spotlight": "^4.11.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.19.39",
     "jest": "^30.3.0",

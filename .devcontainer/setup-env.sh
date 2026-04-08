@@ -14,4 +14,5 @@ BETTER_AUTH_URL=http://localhost:3000
 GITHUB_CLIENT_ID=
 GITHUB_CLIENT_SECRET=
 DATABASE_URL=postgresql://skeleton:skeleton@localhost:5432/skeleton
+SENTRY_SPOTLIGHT=1
 EOF

@@ -39,91 +39,29 @@ A full-stack application skeleton built as a pnpm monorepo with Turborepo.
 
 ## Getting Started
 
-### Option A: Dev Container (recommended)
+### Dev Container
 
-The fastest way to get running. Requires [VS Code](https://code.visualstudio.com/) with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) (or any DevContainer-compatible editor) and Docker.
+Requires [VS Code](https://code.visualstudio.com/) with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) (or any DevContainer-compatible editor) and Docker.
 
-1. Clone the repo and open it in VS Code
-2. When prompted, click **Reopen in Container** (or run `Dev Containers: Reopen in Container` from the command palette)
-3. Create a `.env.local` file in the project root:
+1. [Create a GitHub OAuth app](https://github.com/settings/developers) with callback URL `http://localhost:3000/api/auth/callback/github`
+2. Open VS Code and run **Dev Containers: Clone Repository in Container Volume** from the command palette
+3. Paste the repo URL and let the container build
+4. The container generates `.env.local` with sensible defaults. Fill in your GitHub OAuth credentials:
 
 ```bash
-# Auth
-BETTER_AUTH_SECRET=<generate with: openssl rand -base64 32>
-BETTER_AUTH_URL=http://localhost:3000
-
-# GitHub OAuth (create at https://github.com/settings/developers)
 GITHUB_CLIENT_ID=<your-client-id>
 GITHUB_CLIENT_SECRET=<your-client-secret>
-
-# API (optional, defaults shown)
-NEXT_PUBLIC_API_URL=http://localhost:4000
 ```
 
-> `DATABASE_URL` is provided automatically by the dev container -- no need to set it.
+5. Run `pnpm dev` and you're up
 
-4. Run `pnpm dev` and you're up
+### What `pnpm dev` starts
 
-For the GitHub OAuth app, set the callback URL to `http://localhost:3000/api/auth/callback/github`.
+Open http://localhost:3000 to access the app. The other services are available from the admin sidebar after signing in:
 
-### Option B: Local setup
-
-#### Prerequisites
-
-- Node.js 24+
-- pnpm 10+
-- Docker (for Postgres)
-- A GitHub OAuth app (for authentication)
-
-#### 1. Clone and install
-
-```bash
-git clone <repo-url>
-cd fullstack-skeleton
-pnpm install
-```
-
-#### 2. Set up environment variables
-
-Create a `.env.local` file in the project root:
-
-```bash
-# Auth
-BETTER_AUTH_SECRET=<generate with: openssl rand -base64 32>
-BETTER_AUTH_URL=http://localhost:3000
-
-# GitHub OAuth (create at https://github.com/settings/developers)
-GITHUB_CLIENT_ID=<your-client-id>
-GITHUB_CLIENT_SECRET=<your-client-secret>
-
-# Database
-DATABASE_URL=postgresql://skeleton:skeleton@localhost:5432/skeleton
-
-# API (optional, defaults shown)
-NEXT_PUBLIC_API_URL=http://localhost:4000
-```
-
-For the GitHub OAuth app, set the callback URL to `http://localhost:3000/api/auth/callback/github`.
-
-#### 3. Push the database schema
-
-```bash
-docker compose up -d
-pnpm --filter @skeleton/db db:generate
-pnpm --filter @skeleton/db db:push
-```
-
-#### 4. Run the dev servers
-
-```bash
-pnpm dev
-```
-
-This starts:
-
-- **Web** at http://localhost:3000
-- **API** at http://localhost:4000
-- **Prisma Studio** at http://localhost:5555
+- **API Docs** at http://localhost:4000/docs
+- **DB Studio** at http://localhost:5555
+- **Sentry Spotlight** at http://localhost:8969
 
 ### Promote yourself to admin
 
@@ -139,18 +77,19 @@ docker exec $(docker ps -q --filter ancestor=postgres:17-alpine) \
 
 - **API Docs** (`/api-docs`) -- Swagger UI for the Hono API
 - **DB Studio** (`/db-studio`) -- Prisma Studio for database inspection
+- **Spotlight** (`/spotlight`) -- Sentry Spotlight for local error and trace inspection
 - **Impersonate** (`/impersonate`) -- View the app as another user. Select any user from the list or create a test user on the fly. Your admin session is preserved (tracked via the `impersonatedBy` field on the session), and an amber banner appears in the header with a "Stop Impersonating" button to end the session. Nested impersonation is not allowed.
 
 ## Scripts
 
-| Command                              | Description                                               |
-| ------------------------------------ | --------------------------------------------------------- |
-| `pnpm dev`                           | Start all services (Postgres + web + API + Prisma Studio) |
-| `pnpm build`                         | Build all packages and apps                               |
-| `pnpm lint`                          | Lint all packages                                         |
-| `pnpm --filter @skeleton/db db:push` | Push Prisma schema to database                            |
-| `pnpm --filter @skeleton/db studio`  | Open Prisma Studio standalone                             |
-| `pnpm codegen:openapi`               | Generate OpenAPI spec from Hono routes                    |
-| `pnpm codegen:swift`                 | Generate Swift types from OpenAPI spec                    |
-| `pnpm docker:up`                     | Start Postgres container                                  |
-| `pnpm docker:down`                   | Stop Postgres container                                   |
+| Command                              | Description                                                        |
+| ------------------------------------ | ------------------------------------------------------------------ |
+| `pnpm dev`                           | Start all services (web + API + Prisma Studio + Sentry Spotlight)  |
+| `pnpm build`                         | Build all packages and apps                                        |
+| `pnpm lint`                          | Lint all packages                                                  |
+| `pnpm test`                          | Run tests with coverage                                            |
+| `pnpm clean`                         | Remove node_modules, .turbo, .next, and .pnpm-store                |
+| `pnpm --filter @skeleton/db db:push` | Push Prisma schema to database                                     |
+| `pnpm --filter @skeleton/db studio`  | Open Prisma Studio standalone                                      |
+| `pnpm codegen:openapi`               | Generate OpenAPI spec from Hono routes                             |
+| `pnpm codegen:swift`                 | Generate Swift types from OpenAPI spec                             |
