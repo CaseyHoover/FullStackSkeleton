@@ -1,6 +1,11 @@
 "use client";
 
-import { IconApi, IconDatabase, IconUserScan } from "@tabler/icons-react";
+import {
+  IconApi,
+  IconBrandSentry,
+  IconDatabase,
+  IconUserScan,
+} from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,6 +20,7 @@ import {
 const items = [
   { name: "API Docs", url: "/api-docs", icon: IconApi },
   { name: "DB Studio", url: "/db-studio", icon: IconDatabase },
+  { name: "Spotlight", url: "/spotlight", icon: IconBrandSentry },
   {
     name: "Impersonate",
     url: "/impersonate",
