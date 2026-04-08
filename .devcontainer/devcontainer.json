@@ -4,8 +4,8 @@
   "service": "app",
   "workspaceFolder": "/workspace",
   "remoteUser": "root",
-  "forwardPorts": [3000, 4000, 5555],
-  "onCreateCommand": "cp /tmp/.host-gitconfig /root/.gitconfig 2>/dev/null; git config --global --add safe.directory /workspace && gh auth setup-git 2>/dev/null; bash /workspace/.devcontainer/setup-env.sh && pnpm install && pnpm db:generate && pnpm build ",
+  "forwardPorts": [3000, 4000, 5555, 8969],
+  "onCreateCommand": "cp /tmp/.host-gitconfig /root/.gitconfig 2>/dev/null; git config --global --add safe.directory /workspace && gh auth setup-git 2>/dev/null; bash /workspace/.devcontainer/setup-env.sh && pnpm install && pnpm db:generate && pnpm build",
   "customizations": {
     "vscode": {
       "settings": {

@@ -4,20 +4,21 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --env-file=.env.local src/index.ts",
+    "dev": "NODE_ENV=development tsx watch --env-file=.env.local src/index.ts",
     "build": "tsup src/index.ts --format esm --dts",
     "start": "node dist/index.js",
     "lint": "tsc --noEmit",
     "test": "jest --coverage"
   },
   "dependencies": {
-    "@skeleton/auth": "workspace:*",
-    "@skeleton/db": "workspace:*",
-    "@prisma/client": "^6.6.0",
-    "@skeleton/shared": "workspace:*",
     "@hono/node-server": "^1.14.0",
     "@hono/swagger-ui": "^0.6.1",
     "@hono/zod-openapi": "^1.2.4",
+    "@prisma/client": "^6.6.0",
+    "@sentry/node": "^10.47.0",
+    "@skeleton/auth": "workspace:*",
+    "@skeleton/db": "workspace:*",
+    "@skeleton/shared": "workspace:*",
     "hono": "^4.7.0",
     "zod": "^4.3.6"
   },
