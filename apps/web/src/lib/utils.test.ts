@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vitest";
+
 import { cn } from "./utils.js";
 
 describe("cn", () => {
@@ -6,8 +8,7 @@ describe("cn", () => {
   });
 
   it("filters out falsy values", () => {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    expect(cn("block", false && "hidden")).toBe("block");
+    expect(cn("block", undefined, "text-sm")).toBe("block text-sm");
   });
 
   it("deduplicates conflicting tailwind classes", () => {

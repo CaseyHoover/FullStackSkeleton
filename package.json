@@ -2,7 +2,7 @@
   "name": "fullstack-skeleton",
   "private": true,
   "scripts": {
-    "dev": "bash .devcontainer/check-env.sh && (spotlight server & turbo dev)",
+    "dev": "bash .devcontainer/check-env.sh && (spotlight server & turbo dev test:ui)",
     "build": "turbo build",
     "lint": "turbo lint",
     "format": "prettier --write .",
@@ -11,7 +11,8 @@
     "codegen:swift": "turbo codegen:swift",
     "db:generate": "turbo db:generate",
     "db:push": "turbo db:push",
-    "test": "turbo test",
+    "test": "vitest run",
+    "test:ui": "vitest --ui --open false --changed",
     "db:studio": "pnpm --filter @skeleton/db studio",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
@@ -20,14 +21,13 @@
   },
   "devDependencies": {
     "@spotlightjs/spotlight": "^4.11.3",
-    "@types/jest": "^30.0.0",
     "@types/node": "^25.5.2",
-    "jest": "^30.3.0",
+    "@vitest/ui": "^4.1.4",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "ts-jest": "^29.4.9",
     "turbo": "^2.9.5",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.4"
   },
   "packageManager": "pnpm@10.33.0",
   "pnpm": {

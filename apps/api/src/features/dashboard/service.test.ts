@@ -1,10 +1,11 @@
+import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import type { VisitorDataPoint } from "@skeleton/shared";
 
 import * as repo from "./repository.js";
 
-jest.mock("./repository.js");
+vi.mock("./repository.js");
 
-const mockedRepo = repo as jest.Mocked<typeof repo>;
+const mockedRepo = vi.mocked(repo);
 
 describe("dashboard service", () => {
   let service: typeof import("./service.js");
@@ -13,7 +14,7 @@ describe("dashboard service", () => {
     service = await import("./service.js");
   });
 
-  afterEach(() => jest.resetAllMocks());
+  afterEach(() => vi.resetAllMocks());
 
   it("getVisitors delegates to repository", () => {
     const visitors: VisitorDataPoint[] = [

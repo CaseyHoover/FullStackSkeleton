@@ -18,6 +18,7 @@ services:
       - "4000:4000"
       - "5555:5555"
       - "8969:8969"
+      - "51204:51204"
     command: sleep infinity
     environment:
       DATABASE_URL: postgresql://skeleton:skeleton@db:5432/skeleton

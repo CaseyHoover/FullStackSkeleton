@@ -4,7 +4,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 
 import { prisma } from "@skeleton/db";
 
-export const auth = betterAuth({
+export const authConfig = {
   baseURL: process.env.BETTER_AUTH_URL,
   database: prismaAdapter(prisma, { provider: "postgresql" }),
   socialProviders: {
@@ -18,4 +18,6 @@ export const auth = betterAuth({
       defaultRole: "user",
     }),
   ],
-});
+} satisfies Parameters<typeof betterAuth>[0];
+
+export const auth = betterAuth(authConfig);

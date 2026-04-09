@@ -4,6 +4,7 @@ import {
   IconApi,
   IconBrandSentry,
   IconDatabase,
+  IconTestPipe,
   IconUserScan,
 } from "@tabler/icons-react";
 import Link from "next/link";
@@ -21,6 +22,7 @@ const items = [
   { name: "API Docs", url: "/api-docs", icon: IconApi },
   { name: "DB Studio", url: "/db-studio", icon: IconDatabase },
   { name: "Spotlight", url: "/spotlight", icon: IconBrandSentry },
+  { name: "Tests", url: "/tests", icon: IconTestPipe },
   {
     name: "Impersonate",
     url: "/impersonate",
