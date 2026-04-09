@@ -19,6 +19,17 @@
     "test": {
       "dependsOn": ["^build"]
     },
+    "test:integration": {
+      "cache": false,
+      "dependsOn": ["^db:generate"],
+      "env": ["DATABASE_URL"]
+    },
+    "//#test:ui": {
+      "cache": false,
+      "persistent": true,
+      "interruptible": true,
+      "env": ["DATABASE_URL"]
+    },
     "db:generate": {
       "cache": false
     },
