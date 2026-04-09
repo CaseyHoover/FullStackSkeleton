@@ -1,4 +1,4 @@
-FROM node:24-slim
+FROM node:25-slim
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -31,4 +31,4 @@ RUN git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:
 COPY .devcontainer/.zshrc /root/.zshrc
 COPY .devcontainer/.zsh_aliases /root/.zsh_aliases
 
-RUN corepack enable && corepack prepare pnpm@10.8.1 --activate
+RUN npm install -g pnpm@10.8.1
