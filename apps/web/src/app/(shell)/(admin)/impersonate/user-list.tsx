@@ -29,28 +29,26 @@ interface User {
 
 export function UserList({ currentUserId }: { currentUserId: string }) {
   const [users, setUsers] = React.useState<User[]>([]);
-  const [loading, setLoading] = React.useState(true);
+  const [isPending, startTransition] = React.useTransition();
   const [showCreate, setShowCreate] = React.useState(false);
   const [creating, setCreating] = React.useState(false);
 
-  function loadUsers() {
-    authClient.admin
-      .listUsers({ query: { limit: 100 } })
-      .then((res) => {
+  const loadUsers = React.useCallback(() => {
+    startTransition(async () => {
+      try {
+        const res = await authClient.admin.listUsers({
+          query: { limit: 100 },
+        });
         setUsers(res.data.users.filter((u) => u.id !== currentUserId));
-      })
-      .catch(() => {
+      } catch {
         toast.error("Failed to load users");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }
+      }
+    });
+  }, [currentUserId]);
 
   React.useEffect(() => {
     loadUsers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- only on mount
-  }, []);
+  }, [loadUsers]);
 
   function handleImpersonate(userId: string) {
     void authClient.admin.impersonateUser({
@@ -168,7 +166,7 @@ export function UserList({ currentUserId }: { currentUserId: string }) {
           </CardContent>
         )}
         <CardContent>
-          {loading ? (
+          {isPending ? (
             <p className="text-sm text-muted-foreground">Loading users...</p>
           ) : users.length === 0 ? (
             <p className="text-sm text-muted-foreground">

@@ -367,13 +367,11 @@ function DraggableRow({ row }: { row: Row<Document> }) {
 
 export function DataTable() {
   const { data: fetchedData, isLoading } = useDocuments();
-  const [data, setData] = React.useState<Document[]>([]);
-
-  React.useEffect(() => {
-    if (fetchedData) {
-      setData(fetchedData);
-    }
-  }, [fetchedData]);
+  const [dataOverride, setDataOverride] = React.useState<Document[]>([]);
+  const data = React.useMemo(
+    () => (dataOverride.length ? dataOverride : (fetchedData ?? [])),
+    [dataOverride, fetchedData],
+  );
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -397,7 +395,6 @@ export function DataTable() {
     [data],
   );
 
-  // eslint-disable-next-line react-hooks/incompatible-library -- TanStack Table's API is intentionally designed this way; not fixable in user code
   const table = useReactTable({
     data,
     columns,
@@ -436,9 +433,9 @@ export function DataTable() {
           <Skeleton className="h-8 w-24" />
         </div>
         <div className="rounded-lg border">
-          {Array.from({ length: 8 }).map((_, i) => (
+          {["a", "b", "c", "d", "e", "f", "g", "h"].map((id) => (
             <div
-              key={i}
+              key={id}
               className="
                 flex items-center gap-4 border-b px-4 py-3
                 last:border-b-0
@@ -459,11 +456,9 @@ export function DataTable() {
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (over && active.id !== over.id) {
-      setData((data) => {
-        const oldIndex = dataIds.indexOf(active.id);
-        const newIndex = dataIds.indexOf(over.id);
-        return arrayMove(data, oldIndex, newIndex);
-      });
+      const oldIndex = dataIds.indexOf(active.id);
+      const newIndex = dataIds.indexOf(over.id);
+      setDataOverride(arrayMove(data, oldIndex, newIndex));
     }
   }
 
