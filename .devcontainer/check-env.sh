@@ -22,11 +22,3 @@ if [[ ${#missing[@]} -gt 0 ]]; then
   echo ""
   return 1 2>/dev/null || exit 1
 fi
-
-# Rebuild if .env.local is newer than the last build
-if [[ "$ENV_FILE" -nt /workspace/apps/web/.next ]]; then
-  echo ""
-  echo "🔄 .env.local changed since last build — rebuilding..."
-  echo ""
-  pnpm build
-fi
