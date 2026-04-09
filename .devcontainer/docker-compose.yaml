@@ -9,6 +9,15 @@ services:
       - ~/.config/gh:/root/.config/gh:cached
       - ~/.gitconfig:/tmp/.host-gitconfig:ro
       - fullstackskeleton-zsh-history:/root/.zsh_history_data
+    # Docker-native port mapping instead of VS Code's forwardPorts proxy.
+    # forwardPorts routes traffic through VS Code's built-in proxy, which adds
+    # significant latency and can cause requests to hang for 60s+ after container
+    # rebuilds. Docker-native mapping bypasses this entirely.
+    ports:
+      - "3000:3000"
+      - "4000:4000"
+      - "5555:5555"
+      - "8969:8969"
     command: sleep infinity
     environment:
       DATABASE_URL: postgresql://skeleton:skeleton@db:5432/skeleton
