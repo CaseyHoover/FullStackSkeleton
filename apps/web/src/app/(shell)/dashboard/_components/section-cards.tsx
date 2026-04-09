@@ -24,8 +24,8 @@ function SectionCardsSkeleton() {
         @5xl/main:grid-cols-4
       "
     >
-      {Array.from({ length: 4 }).map((_, i) => (
-        <Card key={i} className="@container/card">
+      {["a", "b", "c", "d"].map((id) => (
+        <Card key={id} className="@container/card">
           <CardHeader>
             <Skeleton className="h-4 w-24" />
             <Skeleton className="h-8 w-32" />

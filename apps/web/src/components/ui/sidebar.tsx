@@ -45,7 +45,7 @@ interface SidebarContextProps {
 const SidebarContext = React.createContext<SidebarContextProps | null>(null);
 
 function useSidebar() {
-  const context = React.useContext(SidebarContext);
+  const context = React.use(SidebarContext);
   if (!context) {
     throw new Error("useSidebar must be used within a SidebarProvider.");
   }
@@ -69,25 +69,21 @@ function SidebarProvider({
   const isMobile = useIsMobile();
   const [openMobile, setOpenMobile] = React.useState(false);
 
-  const [_open, _setOpen] = React.useState(defaultOpen);
-
-  // Sync from cookie on mount to persist sidebar state across navigations.
-  React.useEffect(() => {
+  const [internalOpen, setInternalOpen] = React.useState(() => {
+    if (typeof document === "undefined") return defaultOpen;
     const match = new RegExp(`(?:^|; )${SIDEBAR_COOKIE_NAME}=([^;]*)`).exec(
       document.cookie,
     );
-    if (match) {
-      _setOpen(match[1] === "true");
-    }
-  }, []);
-  const open = openProp ?? _open;
+    return match ? match[1] === "true" : defaultOpen;
+  });
+  const open = openProp ?? internalOpen;
   const setOpen = React.useCallback(
     (value: boolean | ((value: boolean) => boolean)) => {
       const openState = typeof value === "function" ? value(open) : value;
       if (setOpenProp) {
         setOpenProp(openState);
       } else {
-        _setOpen(openState);
+        setInternalOpen(openState);
       }
 
       // This sets the cookie to keep the sidebar state.
@@ -141,7 +137,7 @@ function SidebarProvider({
   );
 
   return (
-    <SidebarContext.Provider value={contextValue}>
+    <SidebarContext value={contextValue}>
       <div
         data-slot="sidebar-wrapper"
         style={
@@ -162,7 +158,7 @@ function SidebarProvider({
       >
         {children}
       </div>
-    </SidebarContext.Provider>
+    </SidebarContext>
   );
 }
 

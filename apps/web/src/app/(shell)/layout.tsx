@@ -5,13 +5,17 @@ import { SiteHeader } from "@/app/(shell)/_components/site-header";
 import { getSession } from "@/auth/session";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
+async function getSidebarDefault() {
+  const cookieStore = await cookies();
+  return cookieStore.get("sidebar_state")?.value !== "false";
+}
+
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = await cookies();
-  const defaultOpen = cookieStore.get("sidebar_state")?.value !== "false";
+  const defaultOpen = await getSidebarDefault();
   const session = await getSession();
   const isImpersonating = Boolean(session?.session.impersonatedBy);
 

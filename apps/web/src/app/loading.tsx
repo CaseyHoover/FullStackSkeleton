@@ -17,8 +17,8 @@ export default function Loading() {
             @5xl/main:grid-cols-4
           "
         >
-          {Array.from({ length: 4 }).map((_, i) => (
-            <Skeleton key={i} className="h-35 rounded-xl" />
+          {["a", "b", "c", "d"].map((id) => (
+            <Skeleton key={id} className="h-35 rounded-xl" />
           ))}
         </div>
         <div
