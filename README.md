@@ -1,5 +1,7 @@
 # FullStackSkeleton
 
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+
 A full-stack application skeleton built as a pnpm monorepo with Turborepo.
 
 ## Architecture
