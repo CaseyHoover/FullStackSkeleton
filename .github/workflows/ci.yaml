@@ -14,6 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Ensure host ~/.gitconfig exists as a file
+        run: touch ~/.gitconfig
+
       - uses: devcontainers/ci@v0.3
         with:
           env: |
@@ -36,7 +39,7 @@ jobs:
             pnpm test
             pnpm test:e2e
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
