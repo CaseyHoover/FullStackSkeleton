@@ -18,6 +18,7 @@ jobs:
         with:
           env: |
             BETTER_AUTH_SECRET=ci-test-secret-not-for-production
+            BETTER_AUTH_URL=http://localhost:3000
           runCmd: |
             set -e
             zsh -c '
