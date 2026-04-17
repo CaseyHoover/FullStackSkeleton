@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 
-export default function SignInPage() {
+export default function SignUpPage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -28,8 +28,10 @@ export default function SignInPage() {
     <div className="flex min-h-svh items-center justify-center">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">Welcome to FullStackSkeleton</CardTitle>
-          <CardDescription>Sign in to access your dashboard</CardDescription>
+          <CardTitle className="text-2xl">Create an account</CardTitle>
+          <CardDescription>
+            Sign up to get started with FullStackSkeleton
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form
@@ -40,14 +42,15 @@ export default function SignInPage() {
               setError(null);
 
               const formData = new FormData(e.currentTarget);
+              const name = formData.get("name") as string;
               const email = formData.get("email") as string;
               const password = formData.get("password") as string;
 
-              void authClient.signIn
-                .email({ email, password })
+              void authClient.signUp
+                .email({ name, email, password })
                 .then(({ error: err }) => {
                   if (err) {
-                    setError(err.message ?? "Invalid email or password");
+                    setError(err.message ?? "Sign up failed");
                     setPending(false);
                   } else {
                     router.push("/dashboard");
@@ -56,6 +59,10 @@ export default function SignInPage() {
             }}
           >
             <div className="flex flex-col gap-2">
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" name="name" required />
+            </div>
+            <div className="flex flex-col gap-2">
               <Label htmlFor="email">Email</Label>
               <Input id="email" name="email" type="email" required />
             </div>
@@ -63,11 +70,9 @@ export default function SignInPage() {
               <Label htmlFor="password">Password</Label>
               <Input id="password" name="password" type="password" required />
             </div>
-            {error && (
-              <p className="text-sm text-destructive">{error}</p>
-            )}
+            {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" className="w-full" disabled={pending}>
-              Sign in
+              Sign up
             </Button>
           </form>
           <div className="relative my-4 flex items-center">
@@ -86,14 +91,14 @@ export default function SignInPage() {
             }}
           >
             <IconBrandGithub />
-            Sign in with GitHub
+            Sign up with GitHub
           </Button>
         </CardContent>
         <CardFooter className="justify-center">
           <p className="text-sm text-muted-foreground">
-            Don&apos;t have an account?{" "}
-            <Link href="/sign-up" className="text-foreground underline">
-              Sign up
+            Already have an account?{" "}
+            <Link href="/sign-in" className="text-foreground underline">
+              Sign in
             </Link>
           </p>
         </CardFooter>

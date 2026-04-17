@@ -11,7 +11,8 @@
     "codegen:swift": "turbo codegen:swift",
     "db:generate": "turbo db:generate",
     "db:push": "turbo db:push",
-    "test": "vitest run",
+    "test": "vitest run --coverage",
+    "test:e2e": "pnpm --filter @skeleton/web test:e2e",
     "test:ui": "vitest --ui --open false --changed",
     "db:studio": "pnpm --filter @skeleton/db studio",
     "docker:up": "docker compose up -d",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@spotlightjs/spotlight": "^4.11.3",
     "@types/node": "^25.6.0",
+    "@vitest/coverage-v8": "^4.1.4",
     "@vitest/ui": "^4.1.4",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.7.2",

@@ -2,7 +2,7 @@ import { auth } from "@skeleton/auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const publicPaths = new Set(["/", "/sign-in"]);
+const publicPaths = new Set(["/", "/sign-in", "/sign-up"]);
 
 function isPublic(pathname: string) {
   return publicPaths.has(pathname) || pathname.startsWith("/api/auth/");
