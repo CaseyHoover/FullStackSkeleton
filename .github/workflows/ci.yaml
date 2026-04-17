@@ -8,110 +8,22 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  setup:
-    name: Setup
+  ci:
+    name: CI
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
 
-      - uses: pnpm/action-setup@v6
-        with:
-          version: 10.33.0
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm db:generate
-
-      - uses: actions/cache/save@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: pnpm/action-setup@v6
-        with:
-          version: 10.33.0
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-
-      - run: pnpm lint
-
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    needs: setup
-    services:
-      postgres:
-        image: postgres:17-alpine
-        env:
-          POSTGRES_USER: skeleton
-          POSTGRES_PASSWORD: skeleton
-          POSTGRES_DB: skeleton
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U skeleton"
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 5
-    env:
-      DATABASE_URL: postgresql://skeleton:skeleton@localhost:5432/skeleton
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: pnpm/action-setup@v6
-        with:
-          version: 10.33.0
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-
-      - run: pnpm db:push
-      - run: pnpm test
-
-  devcontainer:
-    name: Dev Container Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
+      - name: Ensure host ~/.gitconfig exists as a file
+        run: touch ~/.gitconfig
 
       - uses: devcontainers/ci@v0.3
         with:
+          env: |
+            BETTER_AUTH_SECRET=ci-test-secret-not-for-production
+            BETTER_AUTH_URL=http://localhost:3000
           runCmd: |
+            set -e
             zsh -c '
               source ~/.zshrc
               echo "Shell: $SHELL"
@@ -122,3 +34,14 @@ jobs:
               done
               echo "All zsh plugins verified"
             '
+            pnpm lint
+            pnpm db:push
+            pnpm test
+            pnpm test:e2e
+
+      - uses: actions/upload-artifact@v5
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report
+          retention-days: 7

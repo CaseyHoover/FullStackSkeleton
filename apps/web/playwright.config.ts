@@ -21,6 +21,7 @@ export default defineConfig({
     command: "pnpm --filter @skeleton/web dev",
     url: "http://localhost:3000",
     reuseExistingServer: !process.env.CI,
+    timeout: 180_000,
     cwd: "../..",
   },
   globalSetup: "./e2e/global-setup.ts",
