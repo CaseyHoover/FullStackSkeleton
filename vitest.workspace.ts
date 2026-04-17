@@ -1,6 +1,4 @@
-import { defineWorkspace } from "vitest/config";
-
-export default defineWorkspace([
+export default [
   {
     test: {
       name: "api",
@@ -24,6 +22,7 @@ export default defineWorkspace([
       name: "web",
       root: "./apps/web",
       include: ["src/**/*.test.ts"],
+      exclude: ["e2e/**"],
     },
   },
   {
@@ -33,4 +32,4 @@ export default defineWorkspace([
       include: ["src/**/*.test.ts"],
     },
   },
-]);
+];
