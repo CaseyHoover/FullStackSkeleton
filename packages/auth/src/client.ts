@@ -8,6 +8,7 @@ type AuthClient = ReturnType<typeof createAuthClient>;
 // portable across pnpm workspace boundaries with declaration: true.
 export interface AppAuthClient {
   signIn: AuthClient["signIn"];
+  signUp: AuthClient["signUp"];
   signOut: AuthClient["signOut"];
   admin: {
     impersonateUser: (opts: {
