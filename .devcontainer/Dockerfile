@@ -31,4 +31,6 @@ RUN git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:
 COPY .devcontainer/.zshrc /root/.zshrc
 COPY .devcontainer/.zsh_aliases /root/.zsh_aliases
 
+RUN npx playwright install-deps chromium
+
 RUN npm install -g pnpm@10.33.0
