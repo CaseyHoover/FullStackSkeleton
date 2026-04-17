@@ -106,65 +106,16 @@ jobs:
   e2e:
     name: E2E
     runs-on: ubuntu-latest
-    needs: setup
-    services:
-      postgres:
-        image: postgres:17-alpine
-        env:
-          POSTGRES_USER: skeleton
-          POSTGRES_PASSWORD: skeleton
-          POSTGRES_DB: skeleton
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U skeleton"
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 5
-    env:
-      DATABASE_URL: postgresql://skeleton:skeleton@localhost:5432/skeleton
-      BETTER_AUTH_SECRET: ci-test-secret-not-for-production
-      BETTER_AUTH_URL: http://localhost:3000
     steps:
       - uses: actions/checkout@v6
 
-      - uses: pnpm/action-setup@v6
+      - uses: devcontainers/ci@v0.3
         with:
-          version: 10.33.0
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-
-      - name: Get Playwright version
-        id: playwright-version
-        run: echo "version=$(node -p "require('./apps/web/package.json').devDependencies['@playwright/test'].replace('^','')")" >> "$GITHUB_OUTPUT"
-
-      - uses: actions/cache@v4
-        id: playwright-cache
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
-
-      - name: Install Playwright browsers
-        run: pnpm --filter @skeleton/web exec playwright install --with-deps chromium
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-
-      - name: Install Playwright system deps
-        run: pnpm --filter @skeleton/web exec playwright install-deps chromium
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-
-      - run: pnpm db:push
-      - run: pnpm test:e2e
+          env: |
+            BETTER_AUTH_SECRET=ci-test-secret-not-for-production
+          runCmd: |
+            pnpm db:push
+            pnpm test:e2e
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
