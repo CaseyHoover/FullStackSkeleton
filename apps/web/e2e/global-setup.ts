@@ -1,5 +1,5 @@
-import { writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 
 import type { FullConfig } from "@playwright/test";
 
@@ -38,5 +38,6 @@ export default async function globalSetup(config: FullConfig) {
     throw new Error(`Failed to seed test user: ${String(res.status)} ${body}`);
   }
 
+  mkdirSync(dirname(TEST_USER_FIXTURE), { recursive: true });
   writeFileSync(TEST_USER_FIXTURE, JSON.stringify({ email, password }));
 }
