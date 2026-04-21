@@ -8,21 +8,28 @@ A full-stack application skeleton built as a pnpm monorepo with Turborepo.
 
 ```mermaid
 flowchart TD
-    Browser[Browser]
-    Web["Next.js<br/>apps/web<br/>:3000"]
-    API["Hono API<br/>apps/api<br/>:4000"]
-
-    subgraph shared [Shared services]
-        direction TB
-        Auth[BetterAuth]
-        DB[("Postgres<br/>(Docker)<br/>:5432")]
-    end
+    Browser(["Browser"])
+    Web["Next.js<br/><code>apps/web</code> :3000"]
+    API["Hono API<br/><code>apps/api</code> :4000"]
+    Auth["BetterAuth"]
+    DB[("Postgres<br/>:5432")]
 
     Browser --> Web
     Browser --> API
     Web -->|fetch| API
-    Web --> shared
-    API --> shared
+    Web --> Auth
+    API --> Auth
+    API --> DB
+    Auth --> DB
+
+    classDef client fill:#dbeafe,stroke:#1d4ed8,color:#1e3a8a
+    classDef app fill:#ede9fe,stroke:#6d28d9,color:#4c1d95
+    classDef service fill:#fef3c7,stroke:#b45309,color:#78350f
+    classDef data fill:#dcfce7,stroke:#15803d,color:#14532d
+    class Browser client
+    class Web,API app
+    class Auth service
+    class DB data
 ```
 
 - **apps/web** -- Next.js frontend. No business-logic API routes. Fetches data from the Hono API via a generated typed client. Auth handled by BetterAuth with GitHub OAuth.
