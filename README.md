@@ -11,16 +11,18 @@ flowchart TD
     Browser[Browser]
     Web["Next.js<br/>apps/web<br/>:3000"]
     API["Hono API<br/>apps/api<br/>:4000"]
-    Auth[BetterAuth]
-    DB[("Postgres<br/>(Docker)<br/>:5432")]
+
+    subgraph shared [Shared services]
+        direction TB
+        Auth[BetterAuth]
+        DB[("Postgres<br/>(Docker)<br/>:5432")]
+    end
 
     Browser --> Web
     Browser --> API
     Web -->|fetch| API
-    Web --> Auth
-    API --> Auth
-    Web --> DB
-    API --> DB
+    Web --> shared
+    API --> shared
 ```
 
 - **apps/web** -- Next.js frontend. No business-logic API routes. Fetches data from the Hono API via a generated typed client. Auth handled by BetterAuth with GitHub OAuth.
