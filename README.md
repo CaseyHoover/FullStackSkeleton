@@ -6,28 +6,21 @@ A full-stack application skeleton built as a pnpm monorepo with Turborepo.
 
 ## Architecture
 
-```
-                    +-------------+
-                    |   Browser   |
-                    +------+------+
-                           |
-              +------------+------------+
-              |                         |
-       +------+------+          +------+------+
-       |   Next.js   |          |   Hono API  |
-       |  apps/web   |--------->|  apps/api   |
-       |  :3000      |  fetch   |  :4000      |
-       +------+------+          +------+------+
-              |                         |
-              |    +----------+         |
-              +--->| BetterAuth|<-------+
-              |    +----------+         |
-              |         |               |
-              |    +----+----+          |
-              +--->|Postgres |<---------+
-                   | (Docker)|
-                   | :5432   |
-                   +---------+
+```mermaid
+flowchart TD
+    Browser[Browser]
+    Web["Next.js<br/>apps/web<br/>:3000"]
+    API["Hono API<br/>apps/api<br/>:4000"]
+    Auth[BetterAuth]
+    DB[("Postgres<br/>(Docker)<br/>:5432")]
+
+    Browser --> Web
+    Browser --> API
+    Web -->|fetch| API
+    Web --> Auth
+    API --> Auth
+    Web --> DB
+    API --> DB
 ```
 
 - **apps/web** -- Next.js frontend. No business-logic API routes. Fetches data from the Hono API via a generated typed client. Auth handled by BetterAuth with GitHub OAuth.
