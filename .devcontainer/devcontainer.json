@@ -18,6 +18,7 @@
         "eamodio.gitlens",
         "esbenp.prettier-vscode",
         "GitHub.vscode-pull-request-github",
+        "MermaidChart.vscode-mermaid-chart",
         "Prisma.prisma",
         "bradlc.vscode-tailwindcss",
         "github.vscode-github-actions",

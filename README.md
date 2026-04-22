@@ -6,28 +6,37 @@ A full-stack application skeleton built as a pnpm monorepo with Turborepo.
 
 ## Architecture
 
-```
-                    +-------------+
-                    |   Browser   |
-                    +------+------+
-                           |
-              +------------+------------+
-              |                         |
-       +------+------+          +------+------+
-       |   Next.js   |          |   Hono API  |
-       |  apps/web   |--------->|  apps/api   |
-       |  :3000      |  fetch   |  :4000      |
-       +------+------+          +------+------+
-              |                         |
-              |    +----------+         |
-              +--->| BetterAuth|<-------+
-              |    +----------+         |
-              |         |               |
-              |    +----+----+          |
-              +--->|Postgres |<---------+
-                   | (Docker)|
-                   | :5432   |
-                   +---------+
+```mermaid
+---
+config:
+  layout: elk
+  look: handDrawn
+---
+flowchart TD
+    Browser(["Browser"]):::client
+
+    subgraph apps [" "]
+        direction LR
+        Web["<b>Next.js</b><br/><code>apps/web</code> · :3000"]:::app
+        API["<b>Hono API</b><br/><code>apps/api</code> · :4000"]:::app
+    end
+
+    Auth["<b>BetterAuth</b>"]:::service
+    DB[("<b>Postgres</b><br/>:5432")]:::data
+
+    Browser ==> Web
+    Browser ==> API
+    Web -->|fetch| API
+    Web --> Auth
+    API --> Auth
+    API --> DB
+    Auth --> DB
+
+    classDef client fill:#dbeafe,stroke:#1d4ed8,stroke-width:2px,color:#1e3a8a
+    classDef app fill:#ede9fe,stroke:#6d28d9,stroke-width:2px,color:#4c1d95
+    classDef service fill:#fef3c7,stroke:#b45309,stroke-width:2px,color:#78350f
+    classDef data fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+    style apps fill:transparent,stroke:transparent
 ```
 
 - **apps/web** -- Next.js frontend. No business-logic API routes. Fetches data from the Hono API via a generated typed client. Auth handled by BetterAuth with GitHub OAuth.
