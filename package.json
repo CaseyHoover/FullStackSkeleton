@@ -23,13 +23,13 @@
   "devDependencies": {
     "@spotlightjs/spotlight": "^4.11.3",
     "@types/node": "^25.6.0",
-    "@vitest/coverage-v8": "^4.1.4",
-    "@vitest/ui": "^4.1.4",
+    "@vitest/coverage-v8": "^4.1.5",
+    "@vitest/ui": "^4.1.5",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "turbo": "^2.9.6",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.4"
+    "vitest": "^4.1.5"
   },
   "packageManager": "pnpm@10.33.0",
   "pnpm": {
