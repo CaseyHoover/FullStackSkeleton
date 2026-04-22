@@ -1,6 +1,0 @@
-generatorName: swift6
-inputSpec: ../../packages/api-spec/openapi.yaml
-outputDir: ./FullStackSkeleton/Generated
-additionalProperties:
-  projectName: FullStackSkeletonAPI
-  library: urlsession

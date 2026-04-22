@@ -8,7 +8,6 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "codegen:openapi": "turbo codegen:openapi",
-    "codegen:swift": "turbo codegen:swift",
     "db:generate": "turbo db:generate",
     "db:push": "turbo db:push",
     "test": "vitest run --coverage",

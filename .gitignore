@@ -47,4 +47,3 @@ next-env.d.ts
 
 # generated
 packages/api-spec/openapi.yaml
-apps/ios/FullStackSkeleton/Generated/
