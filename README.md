@@ -41,7 +41,6 @@ flowchart TD
 
 - **apps/web** -- Next.js frontend. No business-logic API routes. Fetches data from the Hono API via a generated typed client. Auth handled by BetterAuth with GitHub OAuth.
 - **apps/api** -- Hono API server. All backend logic organized as vertical slices (`features/dashboard/`, `features/billing/`). OpenAPI spec auto-generated from route definitions. Protected by session-based auth middleware.
-- **apps/ios** -- SwiftUI project scaffold with OpenAPI Generator config for typed Swift client codegen.
 - **packages/shared** -- Zod schemas (single source of truth for types), constants. Used by both web and API.
 - **packages/auth** -- BetterAuth configuration shared by web and API. Framework-specific wrappers for Next.js (`/next`) and client-side (`/client`).
 - **packages/db** -- Prisma schema and client singleton. Only place Prisma is instantiated.
@@ -103,4 +102,3 @@ docker exec $(docker ps -q --filter ancestor=postgres:17-alpine) \
 | `pnpm --filter @skeleton/db db:push` | Push Prisma schema to database                                     |
 | `pnpm --filter @skeleton/db studio`  | Open Prisma Studio standalone                                      |
 | `pnpm codegen:openapi`               | Generate OpenAPI spec from Hono routes                             |
-| `pnpm codegen:swift`                 | Generate Swift types from OpenAPI spec                             |

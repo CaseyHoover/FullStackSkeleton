@@ -9,7 +9,6 @@ pnpm workspaces + Turborepo. Key commands:
 - `pnpm lint` — lint all packages
 - `pnpm test` — run tests with coverage
 - `pnpm codegen:openapi` — generate OpenAPI spec from API routes
-- `pnpm codegen:swift` — generate Swift types for iOS
 
 ## Structure
 
@@ -17,7 +16,6 @@ pnpm workspaces + Turborepo. Key commands:
 |------|------|
 | `apps/web` | Next.js 16 frontend |
 | `apps/api` | Hono REST API |
-| `apps/ios` | SwiftUI app (consumes generated client) |
 | `packages/shared` | Zod schemas & constants (single source of truth) |
 | `packages/db` | Prisma schema & client |
 | `packages/auth` | BetterAuth config (shared by web + API) |

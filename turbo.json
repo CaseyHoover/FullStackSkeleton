@@ -40,10 +40,6 @@
     "codegen:openapi": {
       "dependsOn": ["@skeleton/api#build"],
       "outputs": ["packages/api-spec/openapi.yaml"]
-    },
-    "codegen:swift": {
-      "dependsOn": ["codegen:openapi"],
-      "outputs": ["apps/ios/FullStackSkeleton/Generated/**"]
     }
   }
 }

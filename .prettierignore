@@ -2,5 +2,4 @@
 node_modules
 dist
 pnpm-lock.yaml
-apps/ios/FullStackSkeleton/Generated
 packages/api-spec/openapi.yaml
