@@ -1,6 +1,7 @@
 {
   "name": "fullstack-skeleton",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "bash .devcontainer/check-env.sh && (spotlight server & turbo dev test:ui)",
     "build": "turbo build",
