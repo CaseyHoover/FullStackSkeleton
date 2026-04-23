@@ -102,3 +102,7 @@ docker exec $(docker ps -q --filter ancestor=postgres:17-alpine) \
 | `pnpm --filter @skeleton/db db:push` | Push Prisma schema to database                                     |
 | `pnpm --filter @skeleton/db studio`  | Open Prisma Studio standalone                                      |
 | `pnpm codegen:openapi`               | Generate OpenAPI spec from Hono routes                             |
+
+## License
+
+[MIT](LICENSE)
