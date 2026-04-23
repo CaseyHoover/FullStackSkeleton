@@ -14,7 +14,9 @@ test.describe("Authentication", () => {
     await page.goto("/sign-up");
 
     await page.getByLabel("Name").fill("New User");
-    await page.getByLabel("Email").fill(`newuser-${String(Date.now())}@example.com`);
+    await page
+      .getByLabel("Email")
+      .fill(`newuser-${String(Date.now())}@example.com`);
     await page.getByLabel("Password").fill("NewPassword123!");
     await page.getByRole("button", { name: "Sign up", exact: true }).click();
 
