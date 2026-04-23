@@ -1,0 +1,30 @@
+name: Markdown Formatting
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "**/*.md"
+      - ".prettierrc"
+      - ".prettierignore"
+      - ".github/workflows/format-md.yaml"
+
+jobs:
+  format-md:
+    name: Check markdown formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Check markdown formatting
+        run: pnpm format:md:check
