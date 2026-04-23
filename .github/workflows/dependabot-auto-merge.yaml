@@ -1,0 +1,38 @@
+# Automatically enables GitHub's auto-merge on Dependabot pull requests
+# so they land once required status checks (configured in branch protection
+# on `main`) succeed. Major version bumps are excluded — those should get
+# a human review before merging.
+#
+# This job is skipped for non-Dependabot PRs, which surfaces as a "skipped"
+# check in the PR status rollup. That's cosmetic, not a merge blocker.
+name: Dependabot auto-merge
+
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    # Only act on PRs opened by Dependabot.
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      # Parses the PR to expose update metadata (ecosystem, dependency names,
+      # update-type, etc.) as step outputs we can gate on below.
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # `--auto` flags the PR for merge; GitHub waits for required checks to
+      # pass and then merges it. `--merge` uses a merge commit to match the
+      # repo's existing history.
+      - name: Enable auto-merge
+        if: steps.metadata.outputs.update-type != 'version-update:semver-major'
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr merge --auto --merge "$PR_URL"
