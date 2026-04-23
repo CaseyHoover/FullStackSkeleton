@@ -72,6 +72,10 @@ const eslintConfig = defineConfig([
         entryPoint: "src/app/globals.css",
       },
     },
+    rules: {
+      // Prettier owns line wrapping; this rule disagrees at JSX edge cases.
+      "better-tailwindcss/enforce-consistent-line-wrapping": "off",
+    },
   },
 
   // Disable type-checked rules for JS config files not covered by tsconfig

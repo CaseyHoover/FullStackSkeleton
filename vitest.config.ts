@@ -19,12 +19,7 @@ export default defineConfig({
         "packages/auth/src/**/*.ts",
         "packages/db/src/**/*.ts",
       ],
-      exclude: [
-        "**/*.test.ts",
-        "**/__tests__/**",
-        "**/index.ts",
-        "**/e2e/**",
-      ],
+      exclude: ["**/*.test.ts", "**/__tests__/**", "**/index.ts", "**/e2e/**"],
     },
   },
 });

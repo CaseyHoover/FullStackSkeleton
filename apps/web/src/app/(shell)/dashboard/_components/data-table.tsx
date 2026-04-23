@@ -747,9 +747,7 @@ export function DataTable() {
           lg:px-6
         "
       >
-        <div
-          className="aspect-video w-full flex-1 rounded-lg border border-dashed"
-        ></div>
+        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
       </TabsContent>
       <TabsContent
         value="key-personnel"
@@ -758,9 +756,7 @@ export function DataTable() {
           lg:px-6
         "
       >
-        <div
-          className="aspect-video w-full flex-1 rounded-lg border border-dashed"
-        ></div>
+        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
       </TabsContent>
       <TabsContent
         value="focus-documents"
@@ -769,9 +765,7 @@ export function DataTable() {
           lg:px-6
         "
       >
-        <div
-          className="aspect-video w-full flex-1 rounded-lg border border-dashed"
-        ></div>
+        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
       </TabsContent>
     </Tabs>
   );

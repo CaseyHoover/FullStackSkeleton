@@ -11,6 +11,7 @@ React 19, Tailwind v4, shadcn/ui. App Router with RSC.
 ## Tailwind v4 Canonical Classes
 
 Always use canonical Tailwind v4 syntax in utility classes (className strings):
+
 - `calc(var(--spacing)*N)` → `--spacing(N)`
 - `bg-gradient-to-t` → `bg-linear-to-t`
 - `translate-x-[2.5rem]` → `translate-x-10` (use scale values)

@@ -92,16 +92,16 @@ docker exec $(docker ps -q --filter ancestor=postgres:17-alpine) \
 
 ## Scripts
 
-| Command                              | Description                                                        |
-| ------------------------------------ | ------------------------------------------------------------------ |
-| `pnpm dev`                           | Start all services (web + API + Prisma Studio + Sentry Spotlight)  |
-| `pnpm build`                         | Build all packages and apps                                        |
-| `pnpm lint`                          | Lint all packages                                                  |
-| `pnpm test`                          | Run tests with coverage                                            |
-| `pnpm clean`                         | Remove node_modules, .turbo, .next, and .pnpm-store                |
-| `pnpm --filter @skeleton/db db:push` | Push Prisma schema to database                                     |
-| `pnpm --filter @skeleton/db studio`  | Open Prisma Studio standalone                                      |
-| `pnpm codegen:openapi`               | Generate OpenAPI spec from Hono routes                             |
+| Command                              | Description                                                       |
+| ------------------------------------ | ----------------------------------------------------------------- |
+| `pnpm dev`                           | Start all services (web + API + Prisma Studio + Sentry Spotlight) |
+| `pnpm build`                         | Build all packages and apps                                       |
+| `pnpm lint`                          | Lint all packages                                                 |
+| `pnpm test`                          | Run tests with coverage                                           |
+| `pnpm clean`                         | Remove node_modules, .turbo, .next, and .pnpm-store               |
+| `pnpm --filter @skeleton/db db:push` | Push Prisma schema to database                                    |
+| `pnpm --filter @skeleton/db studio`  | Open Prisma Studio standalone                                     |
+| `pnpm codegen:openapi`               | Generate OpenAPI spec from Hono routes                            |
 
 ## License
 
