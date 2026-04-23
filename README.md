@@ -105,4 +105,4 @@ docker exec $(docker ps -q --filter ancestor=postgres:17-alpine) \
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE.md)
