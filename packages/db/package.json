@@ -9,10 +9,10 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "dev": "prisma studio --port 5555 --browser none",
+    "dev": "dotenvx run --quiet -f ../../.env.local -- prisma studio --port 5555 --browser none",
     "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "studio": "prisma studio"
+    "db:push": "dotenvx run --quiet -f ../../.env.local -- prisma db push",
+    "studio": "dotenvx run --quiet -f ../../.env.local -- prisma studio"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",

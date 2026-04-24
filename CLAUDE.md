@@ -10,6 +10,8 @@ pnpm workspaces + Turborepo. Key commands:
 - `pnpm test` — run tests with coverage
 - `pnpm codegen:openapi` — generate OpenAPI spec from API routes
 
+Env vars are loaded via [dotenvx](https://dotenvx.com). `.env.local` at the repo root is the single source of truth — `pnpm dev` injects it into every task, so per-package `.env.local` files are not required. Use `pnpm exec dotenvx set KEY value -f .env.<env>` to commit encrypted secrets; decryption keys live in `.env.keys` (gitignored).
+
 ## Structure
 
 | Path                  | Role                                             |
