@@ -1,6 +1,11 @@
 # FullStackSkeleton
 
+[![CI](https://github.com/CaseyHoover/FullStackSkeleton/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/CaseyHoover/FullStackSkeleton/actions/workflows/ci.yaml)
+[![CodeQL](https://github.com/CaseyHoover/FullStackSkeleton/actions/workflows/codeql.yaml/badge.svg?branch=main)](https://github.com/CaseyHoover/FullStackSkeleton/actions/workflows/codeql.yaml)
+[![Release](https://img.shields.io/github/v/release/CaseyHoover/FullStackSkeleton?logo=github&label=release)](https://github.com/CaseyHoover/FullStackSkeleton/releases/latest)
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
+[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/CaseyHoover/FullStackSkeleton)
 
 A full-stack application skeleton built as a pnpm monorepo with Turborepo.
 
