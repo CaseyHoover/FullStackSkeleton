@@ -1,9 +1,13 @@
+# Schedule cronjob "0 5 * * *" = 05:00 UTC every day (all 7 days of the week).
+# Fields are: minute hour day-of-month month day-of-week.
 version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "cron"
+      cronjob: "0 5 * * *"
+      timezone: "Etc/UTC"
     groups:
       dependencies:
         update-types: ["minor", "patch"]
@@ -11,14 +15,20 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "cron"
+      cronjob: "0 5 * * *"
+      timezone: "Etc/UTC"
 
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "cron"
+      cronjob: "0 5 * * *"
+      timezone: "Etc/UTC"
 
   - package-ecosystem: "docker"
     directory: ".devcontainer"
     schedule:
-      interval: "daily"
+      interval: "cron"
+      cronjob: "0 5 * * *"
+      timezone: "Etc/UTC"
