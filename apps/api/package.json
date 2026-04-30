@@ -21,6 +21,7 @@
     "@skeleton/db": "workspace:*",
     "@skeleton/shared": "workspace:*",
     "hono": "^4.12.15",
+    "lodash": "4.17.15",
     "zod": "^4.4.1"
   },
   "devDependencies": {
