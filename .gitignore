@@ -35,8 +35,13 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files
+# env files — dotenvx: commit .env.example and encrypted .env files; never commit decryption keys or local overrides
 .env*
+!.env.example
+!.env.vault
+.env.keys
+.env.local
+.env.*.local
 
 # vercel
 .vercel

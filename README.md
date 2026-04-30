@@ -56,7 +56,7 @@ Requires [VS Code](https://code.visualstudio.com/) with the [Dev Containers exte
 1. [Create a GitHub OAuth app](https://github.com/settings/developers) with callback URL `http://localhost:3000/api/auth/callback/github`
 2. Open VS Code and run **Dev Containers: Clone Repository in Container Volume** from the command palette
 3. Paste the repo URL and let the container build
-4. The container generates `.env.local` with sensible defaults. Fill in your GitHub OAuth credentials:
+4. The container generates `.env.local` with sensible defaults (template lives at `.env.example`). Fill in your GitHub OAuth credentials:
 
 ```bash
 GITHUB_CLIENT_ID=<your-client-id>
@@ -64,6 +64,22 @@ GITHUB_CLIENT_SECRET=<your-client-secret>
 ```
 
 5. Run `pnpm dev` and you're up
+
+### Environment variables
+
+Secrets are loaded through [dotenvx](https://dotenvx.com) — `pnpm dev` injects `.env.local` into every workspace task, so a single file at the repo root feeds the API, web, and Prisma. Use `.env.example` as the checked-in template.
+
+To commit secrets for a non-local environment, encrypt them first:
+
+```bash
+# set an encrypted value (creates .env.production if needed; keys go to .env.keys)
+pnpm exec dotenvx set GITHUB_CLIENT_SECRET "<value>" -f .env.production
+
+# run with a specific encrypted file
+pnpm exec dotenvx run -f .env.production -- pnpm start
+```
+
+`.env.local` and `.env.keys` are always gitignored. Encrypted files like `.env.production` are safe to commit — the decryption key stays in `.env.keys` (or a `DOTENV_PRIVATE_KEY_*` env var in production).
 
 ### What `pnpm dev` starts
 
