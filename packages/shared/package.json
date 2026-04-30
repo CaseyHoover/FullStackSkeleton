@@ -14,7 +14,7 @@
     "test": "vitest run --project shared"
   },
   "dependencies": {
-    "zod": "^4.3.6"
+    "zod": "^4.4.1"
   },
   "devDependencies": {
     "typescript": "^6",
