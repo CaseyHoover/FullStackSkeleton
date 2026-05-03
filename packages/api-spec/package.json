@@ -9,6 +9,6 @@
   "devDependencies": {
     "tsx": "^4.19.0",
     "typescript": "^6",
-    "yaml": "^2.7.0"
+    "yaml": "^2.8.4"
   }
 }
