@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
     "@skeleton/shared",
     "@skeleton/auth",
   ],
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default withSentryConfig(nextConfig, {
