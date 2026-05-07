@@ -14,12 +14,12 @@ jobs:
     name: CI
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Ensure host ~/.gitconfig exists as a file
         run: touch ~/.gitconfig
 
-      - uses: devcontainers/ci@v0.3
+      - uses: devcontainers/ci@b63b30de439b47a52267f241112c5b453b673db5 # v0.3.1900000449
         with:
           env: |
             BETTER_AUTH_SECRET=ci-test-secret-not-for-production
@@ -42,7 +42,7 @@ jobs:
             pnpm test
             pnpm test:e2e
 
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
