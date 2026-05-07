@@ -3,8 +3,10 @@ name: CodeQL
 on:
   push:
     branches: [main]
+    paths-ignore: ["wiki/**"]
   pull_request:
     branches: [main]
+    paths-ignore: ["wiki/**"]
   schedule:
     - cron: "0 6 * * 1"
 
