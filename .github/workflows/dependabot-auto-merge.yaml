@@ -18,6 +18,7 @@ jobs:
     # Only act on PRs opened by Dependabot.
     if: github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       # Parses the PR to expose update metadata (ecosystem, dependency names,
       # update-type, etc.) as step outputs we can gate on below.
