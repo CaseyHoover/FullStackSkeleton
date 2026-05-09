@@ -1,4 +1,3 @@
-import * as Sentry from "@sentry/node";
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { swaggerUI } from "@hono/swagger-ui";
 import { cors } from "hono/cors";
@@ -19,11 +18,6 @@ app.use(
     credentials: true,
   }),
 );
-
-app.onError((err) => {
-  Sentry.captureException(err);
-  throw err;
-});
 
 // Auth routes (public — these ARE the auth endpoints)
 app.route("/api/auth", authRoutes);

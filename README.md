@@ -76,7 +76,6 @@ Open http://localhost:3000 to access the app. The other services are available f
 
 - **API Docs** at http://localhost:4000/docs
 - **DB Studio** at http://localhost:5555
-- **Sentry Spotlight** at http://localhost:8969
 
 ### Promote yourself to admin
 
@@ -92,21 +91,20 @@ docker exec $(docker ps -q --filter ancestor=postgres:17-alpine) \
 
 - **API Docs** (`/api-docs`) -- Swagger UI for the Hono API
 - **DB Studio** (`/db-studio`) -- Prisma Studio for database inspection
-- **Spotlight** (`/spotlight`) -- Sentry Spotlight for local error and trace inspection
 - **Impersonate** (`/impersonate`) -- View the app as another user. Select any user from the list or create a test user on the fly. Your admin session is preserved (tracked via the `impersonatedBy` field on the session), and an amber banner appears in the header with a "Stop Impersonating" button to end the session. Nested impersonation is not allowed.
 
 ## Scripts
 
-| Command                              | Description                                                       |
-| ------------------------------------ | ----------------------------------------------------------------- |
-| `pnpm dev`                           | Start all services (web + API + Prisma Studio + Sentry Spotlight) |
-| `pnpm build`                         | Build all packages and apps                                       |
-| `pnpm lint`                          | Lint all packages                                                 |
-| `pnpm test`                          | Run tests with coverage                                           |
-| `pnpm clean`                         | Remove node_modules, .turbo, .next, and .pnpm-store               |
-| `pnpm --filter @skeleton/db db:push` | Push Prisma schema to database                                    |
-| `pnpm --filter @skeleton/db studio`  | Open Prisma Studio standalone                                     |
-| `pnpm codegen:openapi`               | Generate OpenAPI spec from Hono routes                            |
+| Command                              | Description                                         |
+| ------------------------------------ | --------------------------------------------------- |
+| `pnpm dev`                           | Start all services (web + API + Prisma Studio)      |
+| `pnpm build`                         | Build all packages and apps                         |
+| `pnpm lint`                          | Lint all packages                                   |
+| `pnpm test`                          | Run tests with coverage                             |
+| `pnpm clean`                         | Remove node_modules, .turbo, .next, and .pnpm-store |
+| `pnpm --filter @skeleton/db db:push` | Push Prisma schema to database                      |
+| `pnpm --filter @skeleton/db studio`  | Open Prisma Studio standalone                       |
+| `pnpm codegen:openapi`               | Generate OpenAPI spec from Hono routes              |
 
 ## License
 
