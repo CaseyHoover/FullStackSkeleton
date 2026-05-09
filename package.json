@@ -22,12 +22,12 @@
   },
   "devDependencies": {
     "@spotlightjs/spotlight": "^4.11.3",
-    "@types/node": "^25.6.0",
+    "@types/node": "^25.6.2",
     "@vitest/coverage-v8": "^4.1.5",
     "@vitest/ui": "^4.1.5",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "turbo": "^2.9.9",
+    "turbo": "^2.9.10",
     "typescript": "^6.0.3",
     "vitest": "^4.1.5"
   },
