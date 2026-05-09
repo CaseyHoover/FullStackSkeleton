@@ -19,7 +19,7 @@ Quick reference:
 
 ```bash
 pnpm install
-pnpm dev          # start web + API + Prisma Studio + Spotlight
+pnpm dev          # start web + API + Prisma Studio
 pnpm format:check # prettier
 pnpm lint         # eslint across the workspace
 pnpm test         # vitest with coverage

@@ -35,9 +35,6 @@ jobs:
             MPL-2.0,
             Python-2.0,
             Unlicense
-          # @sentry/cli ships under FSL-1.1-MIT (source-available, converts to MIT
-          # after 2 years). Scope-allowed because we depend on Sentry.
           # split@0.2.x has no license field but the upstream repo is MIT.
           allow-dependencies-licenses: >-
-            pkg:npm/%40sentry/cli,
             pkg:npm/split

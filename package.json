@@ -3,7 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "bash .devcontainer/check-env.sh && (spotlight server & turbo dev test:ui)",
+    "dev": "bash .devcontainer/check-env.sh && turbo dev test:ui",
     "build": "turbo build",
     "lint": "turbo lint",
     "format": "prettier --write .",
@@ -19,7 +19,6 @@
     "reset": "pnpm clean && pnpm install && pnpm build && pnpm dev"
   },
   "devDependencies": {
-    "@spotlightjs/spotlight": "^4.11.3",
     "@types/node": "^25.6.2",
     "@vitest/coverage-v8": "^4.1.5",
     "@vitest/ui": "^4.1.5",
