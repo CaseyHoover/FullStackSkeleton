@@ -15,8 +15,6 @@
     "test:e2e": "pnpm --filter @skeleton/web test:e2e",
     "test:ui": "vitest --ui --open false --changed",
     "db:studio": "pnpm --filter @skeleton/db studio",
-    "docker:up": "docker compose up -d",
-    "docker:down": "docker compose down",
     "clean": "find . -name node_modules -o -name .turbo -o -name .next -o -name .pnpm-store | xargs rm -rf",
     "reset": "pnpm clean && pnpm install && pnpm build && pnpm dev"
   },
