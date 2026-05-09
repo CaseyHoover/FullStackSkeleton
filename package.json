@@ -6,6 +6,7 @@
     "dev": "bash .devcontainer/check-env.sh && turbo dev test:ui",
     "build": "turbo build",
     "lint": "turbo lint",
+    "lint:pinning": "node scripts/check-pinning.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "codegen:openapi": "turbo codegen:openapi",
@@ -19,14 +20,14 @@
     "reset": "pnpm clean && pnpm install && pnpm build && pnpm dev"
   },
   "devDependencies": {
-    "@types/node": "^25.6.2",
-    "@vitest/coverage-v8": "^4.1.5",
-    "@vitest/ui": "^4.1.5",
-    "prettier": "^3.8.3",
-    "prettier-plugin-tailwindcss": "^0.8.0",
-    "turbo": "^2.9.12",
-    "typescript": "^6.0.3",
-    "vitest": "^4.1.5"
+    "@types/node": "~25.6.2",
+    "@vitest/coverage-v8": "~4.1.5",
+    "@vitest/ui": "~4.1.5",
+    "prettier": "~3.8.3",
+    "prettier-plugin-tailwindcss": "~0.8.0",
+    "turbo": "~2.9.12",
+    "typescript": "~6.0.3",
+    "vitest": "~4.1.5"
   },
   "packageManager": "pnpm@10.33.0",
   "pnpm": {

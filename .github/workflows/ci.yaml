@@ -38,6 +38,7 @@ jobs:
               echo "All zsh plugins verified"
             '
             pnpm format:check
+            pnpm lint:pinning
             pnpm lint
             pnpm db:push
             pnpm test

@@ -7,8 +7,8 @@
     "codegen:openapi": "tsx scripts/generate-spec.ts"
   },
   "devDependencies": {
-    "tsx": "^4.19.0",
-    "typescript": "^6",
-    "yaml": "^2.8.4"
+    "tsx": "~4.21.0",
+    "typescript": "~6.0.3",
+    "yaml": "~2.8.4"
   }
 }
