@@ -1,0 +1,79 @@
+name: Bug report
+description: Report something that isn't working as expected
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report. Please fill out the sections below so we can reproduce and fix it quickly.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: A clear and concise description of the bug.
+      placeholder: When I do X, Y happens instead of Z.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Minimal steps that reliably trigger the bug.
+      placeholder: |
+        1. Run `pnpm dev`
+        2. Open http://localhost:3000/...
+        3. Click ...
+        4. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead? Include error messages, stack traces, or screenshots.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      description: Which part of the monorepo is affected?
+      options:
+        - apps/web
+        - apps/api
+        - packages/shared
+        - packages/db
+        - packages/auth
+        - packages/api-client
+        - packages/api-spec
+        - tooling / CI
+        - other / unsure
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Node version, pnpm version, browser (if relevant), and commit SHA or branch.
+      placeholder: |
+        - OS: macOS 15.1
+        - Node: 20.18.0
+        - pnpm: 9.12.3
+        - Branch/SHA: main @ abc1234
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Anything else that might help — links, related issues, recent changes, workarounds tried.
+    validations:
+      required: false

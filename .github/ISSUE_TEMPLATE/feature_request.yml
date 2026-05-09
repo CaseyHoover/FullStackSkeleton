@@ -1,0 +1,55 @@
+name: Feature request
+description: Suggest a new capability or enhancement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement. Please describe the problem you're trying to solve before jumping to a solution — that helps us evaluate the request fully.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+      description: What problem does this solve, or what use case does it enable? Who is affected?
+      placeholder: As a developer using FullStackSkeleton, I want X so that Y...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the change you'd like to see. Include API/UX shape if you have one in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches you've thought about and why they're less suitable.
+    validations:
+      required: false
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      description: Which part of the monorepo would this change?
+      options:
+        - apps/web
+        - apps/api
+        - packages/shared
+        - packages/db
+        - packages/auth
+        - packages/api-client
+        - packages/api-spec
+        - tooling / CI
+        - cross-cutting / unsure
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Mockups, links to prior art, related issues, or anything else that helps frame the request.
+    validations:
+      required: false
