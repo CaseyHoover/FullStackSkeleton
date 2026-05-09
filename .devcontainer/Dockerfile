@@ -33,4 +33,4 @@ COPY .devcontainer/.zsh_aliases /root/.zsh_aliases
 
 RUN npx playwright install-deps chromium
 
-RUN npm install -g pnpm@10.33.0
+RUN npm install -g pnpm@11.0.9
