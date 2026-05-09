@@ -19,9 +19,10 @@ const record = (file, line, message) => {
 // ---- Docker ---------------------------------------------------------------
 
 // Tag must start with a numeric major.minor and may continue with .patch and
-// suffixes like -alpine / -slim / -bookworm. Rejects bare "17", "17-alpine",
-// "latest", "x", etc.
-const DOCKER_TAG_RE = /^[0-9]+\.[0-9]+(\.[0-9]+)?([.+-][A-Za-z0-9._+-]+)*$/;
+// a single suffix run like -alpine / -slim / -bookworm-slim. Rejects bare "17",
+// "17-alpine", "latest", "x", etc. The suffix is one optional group (not a
+// repetition) to avoid ambiguous backtracking.
+const DOCKER_TAG_RE = /^[0-9]+\.[0-9]+(?:\.[0-9]+)?(?:[._-][A-Za-z0-9._-]*)?$/;
 const DOCKER_DIGEST_RE = /@sha256:[a-f0-9]{64}$/;
 
 const checkDockerRef = (file, lineNo, ref) => {
