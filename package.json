@@ -20,7 +20,7 @@
     "reset": "pnpm clean && pnpm install && pnpm build && pnpm dev"
   },
   "devDependencies": {
-    "@types/node": "~25.8.0",
+    "@types/node": "~25.9.1",
     "@vitest/coverage-v8": "~4.1.6",
     "@vitest/ui": "~4.1.6",
     "prettier": "~3.8.3",
