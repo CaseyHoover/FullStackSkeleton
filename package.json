@@ -21,13 +21,13 @@
   },
   "devDependencies": {
     "@types/node": "~25.9.1",
-    "@vitest/coverage-v8": "~4.1.6",
-    "@vitest/ui": "~4.1.6",
+    "@vitest/coverage-v8": "~4.1.7",
+    "@vitest/ui": "~4.1.7",
     "prettier": "~3.8.3",
     "prettier-plugin-tailwindcss": "~0.8.0",
     "turbo": "~2.9.14",
     "typescript": "~6.0.3",
-    "vitest": "~4.1.6"
+    "vitest": "~4.1.7"
   },
   "packageManager": "pnpm@11.0.9"
 }
