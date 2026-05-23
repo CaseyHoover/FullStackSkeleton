@@ -19,7 +19,7 @@
     "@skeleton/auth": "workspace:*",
     "@skeleton/db": "workspace:*",
     "@skeleton/shared": "workspace:*",
-    "hono": "~4.12.21",
+    "hono": "~4.12.22",
     "zod": "~4.4.3"
   },
   "devDependencies": {
