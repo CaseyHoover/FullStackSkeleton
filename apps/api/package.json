@@ -24,11 +24,11 @@
   },
   "devDependencies": {
     "@types/node": "~25.9.1",
-    "@vitest/ui": "~4.1.7",
-    "better-auth": "~1.6.11",
+    "@vitest/ui": "~4.1.8",
+    "better-auth": "~1.6.13",
     "tsup": "~8.5.1",
-    "tsx": "~4.22.3",
+    "tsx": "~4.22.4",
     "typescript": "~6.0.3",
-    "vitest": "~4.1.7"
+    "vitest": "~4.1.8"
   }
 }
