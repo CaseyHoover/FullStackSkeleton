@@ -20,7 +20,7 @@ jobs:
       - name: Ensure host ~/.gitconfig exists as a file
         run: touch ~/.gitconfig
 
-      - uses: devcontainers/ci@b63b30de439b47a52267f241112c5b453b673db5 # v0.3.1900000449
+      - uses: devcontainers/ci@513af61f4de4f75d37e4438f184ba4358f0fc1ca # v0.3.1900000450
         with:
           env: |
             BETTER_AUTH_SECRET=ci-test-secret-not-for-production
