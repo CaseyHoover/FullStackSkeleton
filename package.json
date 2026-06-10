@@ -20,14 +20,14 @@
     "reset": "pnpm clean && pnpm install && pnpm build && pnpm dev"
   },
   "devDependencies": {
-    "@types/node": "~25.9.1",
-    "@vitest/coverage-v8": "~4.1.7",
-    "@vitest/ui": "~4.1.7",
-    "prettier": "~3.8.3",
+    "@types/node": "~25.9.2",
+    "@vitest/coverage-v8": "~4.1.8",
+    "@vitest/ui": "~4.1.8",
+    "prettier": "~3.8.4",
     "prettier-plugin-tailwindcss": "~0.8.0",
-    "turbo": "~2.9.16",
+    "turbo": "~2.9.17",
     "typescript": "~6.0.3",
-    "vitest": "~4.1.7"
+    "vitest": "~4.1.8"
   },
   "packageManager": "pnpm@11.0.9"
 }
