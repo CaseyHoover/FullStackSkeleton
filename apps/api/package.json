@@ -23,9 +23,9 @@
     "zod": "~4.4.3"
   },
   "devDependencies": {
-    "@types/node": "~25.9.2",
+    "@types/node": "~25.9.3",
     "@vitest/ui": "~4.1.8",
-    "better-auth": "~1.6.15",
+    "better-auth": "~1.6.16",
     "tsup": "~8.5.1",
     "tsx": "~4.22.4",
     "typescript": "~6.0.3",
