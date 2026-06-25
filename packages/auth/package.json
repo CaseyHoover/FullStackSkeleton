@@ -16,11 +16,11 @@
   "dependencies": {
     "@skeleton/db": "workspace:*",
     "@prisma/client": "~7.8.0",
-    "better-auth": "~1.6.19",
+    "better-auth": "~1.6.20",
     "zod": "~4.4.3"
   },
   "devDependencies": {
-    "@types/node": "~25.9.3",
+    "@types/node": "~26.0.0",
     "typescript": "~6.0.3"
   }
 }
