@@ -19,16 +19,16 @@
     "@skeleton/auth": "workspace:*",
     "@skeleton/db": "workspace:*",
     "@skeleton/shared": "workspace:*",
-    "hono": "~4.12.27",
+    "hono": "~4.12.28",
     "zod": "~4.4.3"
   },
   "devDependencies": {
     "@types/node": "~26.1.0",
-    "@vitest/ui": "~4.1.9",
+    "@vitest/ui": "~4.1.10",
     "better-auth": "~1.6.23",
     "tsup": "~8.5.1",
     "tsx": "~4.23.0",
     "typescript": "~6.0.3",
-    "vitest": "~4.1.9"
+    "vitest": "~4.1.10"
   }
 }
