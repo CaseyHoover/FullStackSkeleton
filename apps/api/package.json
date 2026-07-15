@@ -12,9 +12,9 @@
     "test:integration": "vitest run --project api:integration"
   },
   "dependencies": {
-    "@hono/node-server": "~2.0.8",
+    "@hono/node-server": "~2.0.9",
     "@hono/swagger-ui": "~0.6.1",
-    "@hono/zod-openapi": "~1.4.0",
+    "@hono/zod-openapi": "~1.5.1",
     "@prisma/client": "~7.8.0",
     "@skeleton/auth": "workspace:*",
     "@skeleton/db": "workspace:*",
