@@ -1,4 +1,4 @@
-FROM node:26.7-slim
+FROM node:26.8-slim
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
