@@ -1,4 +1,4 @@
-FROM node:26.9-slim
+FROM node:26.10-slim
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
